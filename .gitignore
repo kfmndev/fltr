@@ -1,0 +1,57 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Test binaries
+*.test
+*.out
+*.cover
+*.html
+
+# Coverage reports
+coverage.html
+*.prof
+*.pprof
+
+# Go build cache
+go.sum.lock
+go.work.lock
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+*~
+.vim/
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Build/dist artifacts
+/bin/
+/dist/
+/build/
+
+# Vendor directory (if used)
+vendor/
+
+# Local development
+.env
+.env.local
+*.local
+
+# Project specific files
+block_rules.json
+
+# Agents
+.agents
+.github/agents
