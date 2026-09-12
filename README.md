@@ -3,7 +3,7 @@
 
 **Lightweight HTTP reverse proxy for content-based request filtering and routing**
 
-[![Tag](https://img.shields.io/github/v/tag/kfmndev/fltr?style=flat-square)](https://github.com/kfmndev/fltr/tags) [![License](https://img.shields.io/github/license/kfmndev/fltr?style=flat-square&cacheSeconds=86400)](https://github.com/kfmndev/fltr/blob/main/LICENSE.md) [![Go](https://img.shields.io/badge/go-00ADD8?style=flat-square&logo=go&logoColor=white)](https://go.dev)
+[![License](https://img.shields.io/github/license/kfmndev/fltr?style=flat-square)](https://github.com/kfmndev/fltr/blob/main/LICENSE.md) [![Go](https://img.shields.io/badge/go-00ADD8?style=flat-square&logo=go&logoColor=white)](https://go.dev) [![Tag](https://img.shields.io/github/v/tag/kfmndev/fltr?style=flat-square)](https://github.com/kfmndev/fltr/tags) [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/kfmndev/fltr/build.yml?branch=main&style=flat-square)](https://github.com/kfmndev/fltr/actions?query=branch%3Amain)
 </div>
 
 ## 🎯 TL;DR
@@ -17,7 +17,7 @@
 
 ## ✅ Requirements
 
-- Go 1.23 or newer
+- Go 1.25 or newer
 - A JSON file containing the block rules
 - An HTTP service to receive allowed requests
 
@@ -64,16 +64,16 @@ go run .
 
 ## 🚫 Blocklist format
 
-The block rules file is a JSON object. Its keys name rules, and each value is a non-empty array of non-empty terms. A request matches when all terms in at least one rule are present. Terms are trimmed when the file is loaded; if case-insensitive matching is enabled (default), they are also lowercased. The service refuses to start if a rule has no terms or contains a blank term, including a term made blank by surrounding whitespace.
+The block rules file is a JSON object. Its keys name rules, and each value is a non-empty array of non-empty terms. A request matches when all terms in at least one rule are present. Terms are trimmed when the file is loaded. The service refuses to start if a rule has no terms or contains a blank term after trimming.
 
 ```json
 {
     "credentials": ["password", "secret"],
-    "identity": ["ssn"]
+    "identity": ["private-key"]
 }
 ```
 
-With the example above, a request is blocked when it contains both `password` and `secret`, or when it contains `ssn`, somewhere in its body or `Title` and `Message` headers.
+With the example above, a request is blocked when it contains both `password` and `secret`, or when it contains `private-key`, somewhere in its body or `Title` and `Message` headers.
 
 ## 🧪 Try a request
 
@@ -100,11 +100,11 @@ During startup, an HTTP `HEAD` request is sent to each configured upstream befor
 
 By default, the block rules are loaded from the `block_rules.json` file in the current directory. The environment variable `FLTR_BLOCKED_FILE` can specify an alternative path.
 
-When a request reaches the proxy, the body and the `Title` and `Message` headers are matched against the block rules. Matching is case-insensitive by default, but can be made case-sensitive with the `FLTR_CASE_SENSITIVE` environment variable. A request is blocked when all the terms in any configured rule appear in the combined text.
+When a request reaches the proxy, its body and the `Title` and `Message` headers are matched against the block rules. By default, matching is case-insensitive, which is achieved by converting both the combined request text and the block terms to lowercase before matching. This can be configured to be case-sensitive using the `FLTR_CASE_SENSITIVE` environment variable. A request is blocked when all the terms in any configured rule appear in the combined text.
 
-Allowed requests go to `FLTR_ALLOW_UPSTREAM`. Blocked requests go to `FLTR_BLOCK_UPSTREAM` when it is configured. Without a block upstream, blocked requests are discarded and the proxy returns `200 Request blocked, discarded`.
+Allowed requests go to `FLTR_ALLOW_UPSTREAM`. Blocked requests go to `FLTR_BLOCK_UPSTREAM` when it is configured. Without a block upstream, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`.
 
-It forwards requests to the configured upstream URL without preserving the incoming path. Original method, headers, and body are kept. Query parameters already present in the upstream URL are combined with the incoming query parameters.
+It forwards requests to the configured upstream URL without preserving the incoming path. The original method, headers, and body are kept. Query parameters already present in the upstream URL are combined with the incoming query parameters.
 
 Request bodies are limited in size by `FLTR_MAX_BODY_SIZE` (default 10 MB); larger requests are rejected with the `413 Content Too Large` status code.
 
