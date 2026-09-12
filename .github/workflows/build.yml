@@ -1,4 +1,4 @@
-name: Build, test and SonarQube Scan
+name: Build
 
 on:
   push:
@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ${{ github.workflow }} - ${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
