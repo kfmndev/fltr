@@ -17,3 +17,25 @@ repos:
       - id: conventional-pre-commit
         stages: [commit-msg]
         args: []
+  - repo: https://github.com/tekwizely/pre-commit-golang
+    rev: v1.0.0-rc.4
+    hooks:
+      # Formatting
+      - id: go-fmt-repo
+        name: go fmt (repo root)
+
+      # Dependency management
+      - id: go-mod-tidy-repo
+        name: go mod tidy (all modules)
+
+      # Static analysis
+      - id: go-vet-repo-mod
+        name: go vet (all modules)
+
+      # Compilation check
+      - id: go-build-repo-mod
+        name: go build (all modules)
+
+      # Testing
+      - id: go-test-repo-mod
+        name: go test (all modules)
