@@ -78,7 +78,9 @@ func TestNewServerRejectsInvalidConfiguration(t *testing.T) {
 	}{
 		{name: "missing allow upstream", wantErr: "FLTR_ALLOW_UPSTREAM is required"},
 		{name: "invalid allow upstream", allow: "ftp://example.com", wantErr: "invalid FLTR_ALLOW_UPSTREAM"},
+		{name: "unreachable allow upstream", allow: closedUpstreamURL(t), wantErr: "FLTR_ALLOW_UPSTREAM is unreachable"},
 		{name: "invalid block upstream", allow: allowUpstream.URL, block: "ftp://example.com", rules: rulesPath, wantErr: "invalid FLTR_BLOCK_UPSTREAM"},
+		{name: "unreachable block upstream", allow: allowUpstream.URL, block: closedUpstreamURL(t), rules: rulesPath, wantErr: "FLTR_BLOCK_UPSTREAM is unreachable"},
 		{name: "missing rules file", allow: allowUpstream.URL, rules: "/missing/rules.json", wantErr: "could not load block rules"},
 		{name: "invalid max body size", allow: allowUpstream.URL, rules: rulesPath, maxBody: "not a size", wantErr: "invalid FLTR_MAX_BODY_SIZE"},
 	}
@@ -117,6 +119,14 @@ func TestRunHandlesServerResults(t *testing.T) {
 func newUpstream(t *testing.T) *httptest.Server {
 	t.Helper()
 	return httptest.NewServer(http.HandlerFunc(func(http.ResponseWriter, *http.Request) {}))
+}
+
+func closedUpstreamURL(t *testing.T) string {
+	t.Helper()
+	server := newUpstream(t)
+	url := server.URL
+	server.Close()
+	return url
 }
 
 func writeRules(t *testing.T, contents string) string {
