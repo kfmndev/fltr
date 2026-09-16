@@ -30,9 +30,16 @@ func (f ContentFilter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var searchKeys = []string{"Title", "Message"}
+
 	searchText := string(body)
-	searchText += " " + r.Header.Get("Title")
-	searchText += " " + r.Header.Get("Message")
+
+	for _, key := range searchKeys {
+		searchText += " " + r.Header.Get(key)
+		searchText += " " + r.Header.Get(strings.ToLower(key))
+		searchText += " " + r.URL.Query().Get(key)
+		searchText += " " + r.URL.Query().Get(strings.ToLower(key))
+	}
 
 	r.Body = io.NopCloser(bytes.NewReader(body))
 	r.ContentLength = int64(len(body))
