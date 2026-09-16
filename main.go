@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"strconv"
@@ -19,18 +20,38 @@ func main() {
 	log.SetFormatter(&log.TextFormatter{TimestampFormat: "2006-01-02 15:04:05", FullTimestamp: true})
 	log.SetLevel(config.GetLogLevel())
 
+	if err := run(func(server *http.Server) error {
+		return server.ListenAndServe()
+	}); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func run(serve func(*http.Server) error) error {
+	server, err := newServer()
+	if err != nil {
+		return err
+	}
+
+	if err := serve(server); err != nil && err != http.ErrServerClosed {
+		return fmt.Errorf("server stopped: %w", err)
+	}
+	return nil
+}
+
+func newServer() (*http.Server, error) {
 	// Required allow upstream
 	allowUpstream := os.Getenv("FLTR_ALLOW_UPSTREAM")
 	if allowUpstream == "" {
-		log.Fatal("FLTR_ALLOW_UPSTREAM is required")
+		return nil, fmt.Errorf("FLTR_ALLOW_UPSTREAM is required")
 	}
 
 	allowProxy, err := proxy.NewProxy(allowUpstream)
 	if err != nil {
-		log.Fatalf("Invalid FLTR_ALLOW_UPSTREAM: %v", err)
+		return nil, fmt.Errorf("invalid FLTR_ALLOW_UPSTREAM: %w", err)
 	}
 	if err := proxy.CheckUpstream(allowUpstream); err != nil {
-		log.Fatalf("FLTR_ALLOW_UPSTREAM is unreachable: %v", err)
+		return nil, fmt.Errorf("FLTR_ALLOW_UPSTREAM is unreachable: %w", err)
 	}
 
 	// Optional block upstream
@@ -41,10 +62,10 @@ func main() {
 	} else {
 		blockProxy, err = proxy.NewProxy(blockUpstream)
 		if err != nil {
-			log.Fatalf("Invalid FLTR_BLOCK_UPSTREAM: %v", err)
+			return nil, fmt.Errorf("invalid FLTR_BLOCK_UPSTREAM: %w", err)
 		}
 		if err := proxy.CheckUpstream(blockUpstream); err != nil {
-			log.Fatalf("FLTR_BLOCK_UPSTREAM is unreachable: %v", err)
+			return nil, fmt.Errorf("FLTR_BLOCK_UPSTREAM is unreachable: %w", err)
 		}
 	}
 
@@ -64,7 +85,7 @@ func main() {
 	// Load block rules from the specified file
 	blockRules, err := config.LoadBlockRules(config.EnvOr("FLTR_BLOCKED_FILE", "block_rules.json"))
 	if err != nil {
-		log.Fatalf("Could not load block rules: %v", err)
+		return nil, fmt.Errorf("could not load block rules: %w", err)
 	}
 
 	log.Infof("Loaded %d block rules", len(blockRules))
@@ -73,7 +94,7 @@ func main() {
 	// Maximum request body size
 	maxBodySize, err := units.FromHumanSize(config.EnvOr("FLTR_MAX_BODY_SIZE", "10 MB"))
 	if err != nil {
-		log.Fatalf("Invalid FLTR_MAX_BODY_SIZE: %v", err)
+		return nil, fmt.Errorf("invalid FLTR_MAX_BODY_SIZE: %w", err)
 	}
 
 	log.Infof("Request bodies >%d bytes (%s) are rejected", maxBodySize, units.HumanSize(float64(maxBodySize)))
@@ -98,7 +119,5 @@ func main() {
 
 	log.Infof("Listening on %s", server.Addr)
 
-	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		log.Fatalf("Server stopped: %v", err)
-	}
+	return server, nil
 }
