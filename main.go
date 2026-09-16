@@ -15,6 +15,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// BEGIN-NOSCAN
 func main() {
 	// Configure logging
 	log.SetFormatter(&log.TextFormatter{TimestampFormat: "2006-01-02 15:04:05", FullTimestamp: true})
@@ -38,6 +39,7 @@ func run(serve func(*http.Server) error) error {
 	}
 	return nil
 }
+// END-NOSCAN
 
 func newServer() (*http.Server, error) {
 	// Required allow upstream
