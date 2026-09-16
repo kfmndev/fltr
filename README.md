@@ -37,7 +37,7 @@ Start `fltr` with the minimal config: one block rule and an allow upstream.
 
 Set the environment variable temporarily like this:
 
-```sh
+```properties
 export FLTR_ALLOW_UPSTREAM=http://allow.example.com
 ```
 
@@ -45,7 +45,7 @@ To make it permanent, add this to the `~/.bashrc` (or your shell's equivalent).
 
 Alternatively, the command can be prepended with the variable:
 
-```sh
+```properties
 FLTR_ALLOW_UPSTREAM=http://allow.example.com \
 go run .
 ```
@@ -54,11 +54,11 @@ go run .
 
 Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmndev/fltr`. They are built for `linux/amd64` and `linux/arm64`.
 
-As they are based on [`linuxserver/docker-baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/), It is recommended to set `PUID` and `GUID` to avoid file permission issues, see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for more details.
+As they are based on [`linuxserver/docker-baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/), it is recommended to set `PUID` and `GUID` to avoid file permission issues, see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for more details.
 
 ### Docker Run
 
-```sh
+```properties
 docker run -d \
   --name fltr \
   -p 8080:8080 \
@@ -69,7 +69,7 @@ docker run -d \
 
 ### Docker Compose
 
-```sh
+```yml
 services:
   fltr:
     image: ghcr.io/kfmndev/fltr
