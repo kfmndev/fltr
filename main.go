@@ -83,7 +83,7 @@ func newServer() (*http.Server, error) {
 	}
 
 	// Load block rules from the specified file
-	blockRules, err := config.LoadBlockRules(config.EnvOr("FLTR_BLOCKED_FILE", "block_rules.json"))
+	blockRules, err := config.LoadBlockRules(config.EnvOr("FLTR_BLOCK_RULES_FILE", "block_rules.json"))
 	if err != nil {
 		return nil, fmt.Errorf("could not load block rules: %w", err)
 	}

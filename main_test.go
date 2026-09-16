@@ -17,7 +17,7 @@ func TestNewServerDefaults(t *testing.T) {
 	allowUpstream := newUpstream(t)
 	t.Setenv("FLTR_ALLOW_UPSTREAM", allowUpstream.URL)
 	t.Setenv("FLTR_BLOCK_UPSTREAM", "")
-	t.Setenv("FLTR_BLOCKED_FILE", writeRules(t, `{"rule":[" term "]}`))
+	t.Setenv("FLTR_BLOCK_RULES_FILE", writeRules(t, `{"rule":[" term "]}`))
 	t.Setenv("FLTR_ADDR", "127.0.0.1:0")
 	t.Setenv("FLTR_CASE_SENSITIVE", "invalid")
 	t.Setenv("FLTR_MAX_BODY_SIZE", "")
@@ -47,7 +47,7 @@ func TestNewServerWithBlockUpstreamAndOptions(t *testing.T) {
 	blockUpstream := newUpstream(t)
 	t.Setenv("FLTR_ALLOW_UPSTREAM", allowUpstream.URL)
 	t.Setenv("FLTR_BLOCK_UPSTREAM", blockUpstream.URL)
-	t.Setenv("FLTR_BLOCKED_FILE", writeRules(t, `{"rule":["term"]}`))
+	t.Setenv("FLTR_BLOCK_RULES_FILE", writeRules(t, `{"rule":["term"]}`))
 	t.Setenv("FLTR_CASE_SENSITIVE", "true")
 	t.Setenv("FLTR_MAX_BODY_SIZE", "5 KB")
 	t.Setenv("FLTR_ADDR", "127.0.0.1:12345")
@@ -89,7 +89,7 @@ func TestNewServerRejectsInvalidConfiguration(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			t.Setenv("FLTR_ALLOW_UPSTREAM", test.allow)
 			t.Setenv("FLTR_BLOCK_UPSTREAM", test.block)
-			t.Setenv("FLTR_BLOCKED_FILE", test.rules)
+			t.Setenv("FLTR_BLOCK_RULES_FILE", test.rules)
 			t.Setenv("FLTR_MAX_BODY_SIZE", test.maxBody)
 
 			_, err := newServer()
@@ -103,7 +103,7 @@ func TestNewServerRejectsInvalidConfiguration(t *testing.T) {
 func TestRunHandlesServerResults(t *testing.T) {
 	allowUpstream := newUpstream(t)
 	t.Setenv("FLTR_ALLOW_UPSTREAM", allowUpstream.URL)
-	t.Setenv("FLTR_BLOCKED_FILE", writeRules(t, `{"rule":["term"]}`))
+	t.Setenv("FLTR_BLOCK_RULES_FILE", writeRules(t, `{"rule":["term"]}`))
 
 	if err := run(func(*http.Server) error { return http.ErrServerClosed }); err != nil {
 		t.Fatalf("run returned error for normal server close: %v", err)
