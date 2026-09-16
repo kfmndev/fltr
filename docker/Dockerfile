@@ -18,7 +18,7 @@ RUN \
 
 COPY docker/root/ /
 
-ENV FLTR_BLOCKED_FILE=/config/block_rules.json
+ENV FLTR_BLOCK_RULES_FILE=/config/block_rules.json
 
 EXPOSE 8080
 

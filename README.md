@@ -98,7 +98,7 @@ So `ghcr.io/kfmndev/fltr:latest` tracks the most recent release, and `ghcr.io/kf
 | --- | --- | --- | --- |
 | `FLTR_ALLOW_UPSTREAM` | Yes | | URL for requests that do not match the blocklist |
 | `FLTR_BLOCK_UPSTREAM` | No | | URL for requests that match the blocklist |
-| `FLTR_BLOCKED_FILE` | No | `block_rules.json` | Path to the JSON block rules |
+| `FLTR_BLOCK_RULES_FILE` | No | `block_rules.json` | Path to the JSON block rules file |
 | `FLTR_CASE_SENSITIVE` | No | `false` | Enable case-sensitive rule matching |
 | `FLTR_MAX_BODY_SIZE` | No | `10 MB` | Maximum request body size (e.g., `5 MB`, `1 GB`, `512 KB`) |
 | `FLTR_ADDR` | No | `:8080` | Address where the proxy listens |

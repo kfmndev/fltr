@@ -62,7 +62,7 @@ func main() {
 	}
 
 	// Load block rules from the specified file
-	blockRules, err := config.LoadBlockRules(config.EnvOr("FLTR_BLOCKED_FILE", "block_rules.json"))
+	blockRules, err := config.LoadBlockRules(config.EnvOr("FLTR_BLOCK_RULES_FILE", "block_rules.json"))
 	if err != nil {
 		log.Fatalf("Could not load block rules: %v", err)
 	}
