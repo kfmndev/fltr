@@ -21,5 +21,3 @@ COPY docker/root/ /
 ENV FLTR_BLOCK_RULES_FILE=/config/block_rules.json
 
 EXPOSE 8080
-
-LABEL org.opencontainers.image.source="https://github.com/kfmndev/fltr"
