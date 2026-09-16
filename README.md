@@ -50,6 +50,49 @@ FLTR_ALLOW_UPSTREAM=http://allow.example.com \
 go run .
 ```
 
+## 🐳 Run it with Docker
+
+Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmndev/fltr`. They are built for `linux/amd64` and `linux/arm64`.
+
+```sh
+docker run -d \
+  --name fltr \
+  -p 8080:8080 \
+  -v "$PWD/block_rules.json":/config/block_rules.json \
+  -e FLTR_ALLOW_UPSTREAM=http://allow.example.com \
+  ghcr.io/kfmndev/fltr
+```
+
+The container follows LinuxServer.io conventions: the block rules are read from `/config/block_rules.json` by default (set `FLTR_BLOCKED_FILE` to override the path), and the service runs as the `abc` user, remappable with the `PUID` and `PGID` environment variables (default `911`). Keep the example above in mind: `FLTR_ALLOW_UPSTREAM` is required, and the proxy listens on port `8080`.
+
+### Compose
+
+A [`docker-compose.yml`](docker-compose.yml) is included for a declarative setup. Its defaults live in a `.env` file next to it:
+
+```sh
+cp .env.example .env
+# set FLTR_ALLOW_UPSTREAM (required)
+docker compose up -d
+```
+
+The compose setup adds a few Docker-specific variables; the `FLTR_*` runtime settings are still listed in the [Configuration](#-configuration) table below:
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `FLTR_RULES_FILE` | `./block_rules.json` | Host file mounted as the container's block rules |
+| `FLTR_HTTP_PORT` | `8080` | Host port mapped to the container's `8080` |
+| `PUID` / `PGID` | `911` | User/group the service runs as |
+| `TZ` | `Etc/UTC` | Timezone |
+
+### Image tags
+
+The image is published under several tags, depending on what triggered the build:
+
+- Every push to `main`: `ghcr.io/kfmndev/fltr:main` and `ghcr.io/kfmndev/fltr:sha-<short-sha>`, where `<short-sha>` is the commit's short hash.
+- Every **git** version tag (e.g. `v1.0.0`): `latest`, plus the version split into `1`, `1.0`, and `1.0.0`.
+
+So `ghcr.io/kfmndev/fltr:latest` tracks the most recent release, and `ghcr.io/kfmndev/fltr:1.0.0` pins the image to a specific version.
+
 ## 🔧 Configuration
 
 | Variable | Required | Default | Description |
