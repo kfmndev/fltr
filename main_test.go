@@ -111,8 +111,8 @@ func TestRunHandlesServerResults(t *testing.T) {
 
 	wantErr := errors.New("listen failed")
 	err := run(func(*http.Server) error { return wantErr })
-	if !strings.Contains(err.Error(), wantErr.Error()) {
-		t.Fatalf("run error = %v, want wrapped %v", err, wantErr)
+	if !errors.Is(err, wantErr) {
+		t.Fatalf("run error = %v, want it to wrap %v", err, wantErr)
 	}
 }
 
