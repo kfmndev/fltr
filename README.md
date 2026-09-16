@@ -54,6 +54,10 @@ go run .
 
 Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmndev/fltr`. They are built for `linux/amd64` and `linux/arm64`.
 
+As they are based on [`linuxserver/docker-baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/), It is recommended to set `PUID` and `GUID` to avoid file permission issues, see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for more details.
+
+### Docker Run
+
 ```sh
 docker run -d \
   --name fltr \
@@ -63,26 +67,21 @@ docker run -d \
   ghcr.io/kfmndev/fltr
 ```
 
-The container follows LinuxServer.io conventions: the block rules are read from `/config/block_rules.json` by default (set `FLTR_BLOCKED_FILE` to override the path), and the service runs as the `abc` user, remappable with the `PUID` and `PGID` environment variables (default `911`). Keep the example above in mind: `FLTR_ALLOW_UPSTREAM` is required, and the proxy listens on port `8080`.
-
-### Compose
-
-A [`docker-compose.yml`](docker-compose.yml) is included for a declarative setup. Its defaults live in a `.env` file next to it:
+### Docker Compose
 
 ```sh
-cp .env.example .env
-# set FLTR_ALLOW_UPSTREAM (required)
-docker compose up -d
+services:
+  fltr:
+    image: ghcr.io/kfmndev/fltr
+    container_name: fltr
+    ports:
+      - 8080:8080
+    environment:
+      - FLTR_ALLOW_UPSTREAM=http://allow.example.com
+    volumes:
+      - ./block_rules.json:/config/block_rules.json:ro
+    restart: unless-stopped
 ```
-
-The compose setup adds a few Docker-specific variables; the `FLTR_*` runtime settings are still listed in the [Configuration](#-configuration) table below:
-
-| Variable | Default | Description |
-| --- | --- | --- |
-| `FLTR_RULES_FILE` | `./block_rules.json` | Host file mounted as the container's block rules |
-| `FLTR_HTTP_PORT` | `8080` | Host port mapped to the container's `8080` |
-| `PUID` / `PGID` | `911` | User/group the service runs as |
-| `TZ` | `Etc/UTC` | Timezone |
 
 ### Image tags
 
