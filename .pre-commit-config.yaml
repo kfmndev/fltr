@@ -37,5 +37,5 @@ repos:
         name: go build (all modules)
 
       # Testing
-      - id: go-test-mod
-        name: go test (each staged .go file)
+      - id: go-test-repo-mod
+        name: go test (all modules)
