@@ -115,7 +115,7 @@ The block rules file is a JSON object. Its keys name rules, and each value is a 
 }
 ```
 
-With the example above, a request is blocked when it contains both `password` and `secret`, or when it contains `private-key`, somewhere in its body or `Title` and `Message` headers.
+With the example above, a request is blocked when it contains both `password` and `secret`, or when it contains `private-key`, somewhere in its body, the `Title`/`Message` headers, or the `title`/`message` query parameters.
 
 ## 🧪 Try a request
 
@@ -142,7 +142,7 @@ During startup, an HTTP `HEAD` request is sent to each configured upstream befor
 
 By default, the block rules are loaded from the `block_rules.json` file in the current directory. The environment variable `FLTR_BLOCK_RULES_FILE` can specify an alternative path.
 
-When a request reaches the proxy, its body and the `Title` and `Message` headers are matched against the block rules. By default, matching is case-insensitive, which is achieved by converting both the combined request text and the block terms to lowercase before matching. This can be configured to be case-sensitive using the `FLTR_CASE_SENSITIVE` environment variable. A request is blocked when all the terms in any configured rule appear in the combined text.
+When a request reaches the proxy, its body, the `Title` and `Message` headers, and the `title` and `message` query parameters are matched against the block rules. By default, matching is case-insensitive, which is achieved by converting both the combined request text and the block terms to lowercase before matching. This can be configured to be case-sensitive using the `FLTR_CASE_SENSITIVE` environment variable. A request is blocked when all the terms in any configured rule appear in the combined text.
 
 Allowed requests go to `FLTR_ALLOW_UPSTREAM`. Blocked requests go to `FLTR_BLOCK_UPSTREAM` when it is configured. Without a block upstream, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`.
 

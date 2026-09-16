@@ -39,6 +39,7 @@ func run(serve func(*http.Server) error) error {
 	}
 	return nil
 }
+
 // END-NOSCAN
 
 func newServer() (*http.Server, error) {

@@ -47,6 +47,49 @@ func TestContentFilterRoutesAllowedAndBlockedRequests(t *testing.T) {
 	}
 }
 
+func TestContentFilterMatchesQueryParameters(t *testing.T) {
+	var allowed, blocked string
+	filter := ContentFilter{
+		BlockRules:  map[string][]string{"credentials": {"password", "secret"}},
+		MaxBodySize: 10 * 1024 * 1024,
+		AllowProxy: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			body, _ := io.ReadAll(r.Body)
+			allowed = string(body)
+			w.WriteHeader(http.StatusAccepted)
+		}),
+		BlockProxy: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			body, _ := io.ReadAll(r.Body)
+			blocked = string(body)
+			w.WriteHeader(http.StatusCreated)
+		}),
+	}
+
+	allowedRequest := httptest.NewRequest(http.MethodPost, "/?title=ordinary&message=content", strings.NewReader(""))
+	allowedResponse := httptest.NewRecorder()
+	filter.ServeHTTP(allowedResponse, allowedRequest)
+	if allowedResponse.Code != http.StatusAccepted {
+		t.Fatalf("allowed status = %d, want %d", allowedResponse.Code, http.StatusAccepted)
+	}
+
+	blockedRequest := httptest.NewRequest(http.MethodPost, "/?title=secret&message=my+password", strings.NewReader(""))
+	blockedResponse := httptest.NewRecorder()
+	filter.ServeHTTP(blockedResponse, blockedRequest)
+	if blockedResponse.Code != http.StatusCreated {
+		t.Fatalf("blocked status = %d, want %d", blockedResponse.Code, http.StatusCreated)
+	}
+
+	pctEncodedRequest := httptest.NewRequest(http.MethodPost, "/?title=secret&message=my%20password", strings.NewReader(""))
+	pctEncodedResponse := httptest.NewRecorder()
+	filter.ServeHTTP(pctEncodedResponse, pctEncodedRequest)
+	if pctEncodedResponse.Code != http.StatusCreated {
+		t.Fatalf("percent-encoded blocked status = %d, want %d", pctEncodedResponse.Code, http.StatusCreated)
+	}
+
+	if allowed != "" || blocked != "" {
+		t.Errorf("body proxied = %q/%q, want empty", allowed, blocked)
+	}
+}
+
 func TestContentFilterDiscardsBlockedRequestWithoutBlockProxy(t *testing.T) {
 	filter := ContentFilter{
 		BlockRules:  map[string][]string{"secret": {"secret"}},
