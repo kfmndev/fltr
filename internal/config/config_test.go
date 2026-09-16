@@ -4,6 +4,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func TestLoadBlockRulesTrimsTerms(t *testing.T) {
@@ -75,5 +77,50 @@ func TestLoadBlockRulesEmptyPath(t *testing.T) {
 	_, err := LoadBlockRules("")
 	if err == nil {
 		t.Fatal("LoadBlockRules should return error for empty path")
+	}
+}
+
+func TestSetupLoggingDefaultsToText(t *testing.T) {
+	t.Setenv("LOG_FORMAT", "")
+	t.Setenv("LOG_LEVEL", "")
+
+	SetupLogging()
+
+	formatter, ok := log.StandardLogger().Formatter.(*log.TextFormatter)
+	if !ok {
+		t.Fatalf("formatter = %T, want *log.TextFormatter", log.StandardLogger().Formatter)
+	}
+	if !formatter.FullTimestamp {
+		t.Fatal("text formatter has FullTimestamp disabled, want enabled")
+	}
+	if formatter.DisableTimestamp {
+		t.Fatal("text formatter disables timestamps, want them enabled")
+	}
+	if got, want := log.GetLevel(), log.InfoLevel; got != want {
+		t.Fatalf("log level = %v, want %v", got, want)
+	}
+}
+
+func TestSetupLoggingJSON(t *testing.T) {
+	t.Setenv("LOG_FORMAT", "json")
+	t.Setenv("LOG_LEVEL", "debug")
+
+	SetupLogging()
+
+	if _, ok := log.StandardLogger().Formatter.(*log.JSONFormatter); !ok {
+		t.Fatalf("formatter = %T, want *log.JSONFormatter", log.StandardLogger().Formatter)
+	}
+	if got, want := log.GetLevel(), log.DebugLevel; got != want {
+		t.Fatalf("log level = %v, want %v", got, want)
+	}
+}
+
+func TestSetupLoggingUnknownFormatFallsBackToText(t *testing.T) {
+	t.Setenv("LOG_FORMAT", "yaml")
+
+	SetupLogging()
+
+	if _, ok := log.StandardLogger().Formatter.(*log.TextFormatter); !ok {
+		t.Fatalf("formatter = %T, want *log.TextFormatter", log.StandardLogger().Formatter)
 	}
 }

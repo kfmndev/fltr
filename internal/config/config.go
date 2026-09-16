@@ -57,3 +57,18 @@ func GetLogLevel() log.Level {
 	}
 	return level
 }
+
+func SetupLogging() {
+	format := EnvOr("LOG_FORMAT", "text")
+	if format == "json" {
+		log.SetFormatter(&log.JSONFormatter{})
+		log.SetOutput(os.Stdout)
+	} else {
+		log.SetFormatter(&log.TextFormatter{
+			TimestampFormat: "2006-01-02 15:04:05",
+			FullTimestamp:   true,
+			ForceColors:     true,
+		})
+	}
+	log.SetLevel(GetLogLevel())
+}
