@@ -118,7 +118,9 @@ func TestRunHandlesServerResults(t *testing.T) {
 
 func newUpstream(t *testing.T) *httptest.Server {
 	t.Helper()
-	return httptest.NewServer(http.HandlerFunc(func(http.ResponseWriter, *http.Request) {}))
+	server := httptest.NewServer(http.HandlerFunc(func(http.ResponseWriter, *http.Request) {}))
+	t.Cleanup(server.Close)
+	return server
 }
 
 func closedUpstreamURL(t *testing.T) string {
