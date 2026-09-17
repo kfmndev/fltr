@@ -1,0 +1,41 @@
+[project]
+site_name = "fltr"
+site_description = "Lightweight HTTP reverse proxy for content-based request filtering and routing"
+site_url = "https://kfmndev.github.io/fltr/"
+repo_url = "https://github.com/kfmndev/fltr"
+repo_name = "kfmndev/fltr"
+docs_dir = "docs/public"
+
+[project.theme]
+variant = "modern"
+logo = "assets/logo.svg"
+favicon = "assets/logo.svg"
+font.text = "Inter"
+font.code = "JetBrains Mono"
+language = "en"
+
+[[project.theme.palette]]
+scheme = "slate"
+primary = "indigo"
+accent = "deep orange"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to light mode"
+media = "(prefers-color-scheme: dark)"
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "indigo"
+accent = "deep orange"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to dark mode"
+media = "(prefers-color-scheme: light)"
+
+[project.markdown_extensions]
+admonition = {}
+pymdownx.details = {}
+pymdownx.superfences = {}
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+
+[project.markdown_extensions.pymdownx.quotes]
+callouts = true
