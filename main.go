@@ -18,8 +18,7 @@ import (
 // BEGIN-NOSCAN
 func main() {
 	// Configure logging
-	log.SetFormatter(&log.TextFormatter{TimestampFormat: "2006-01-02 15:04:05", FullTimestamp: true})
-	log.SetLevel(config.GetLogLevel())
+	config.SetupLogging()
 
 	if err := run(func(server *http.Server) error {
 		return server.ListenAndServe()

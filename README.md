@@ -103,6 +103,7 @@ So `ghcr.io/kfmndev/fltr:latest` tracks the most recent release, and `ghcr.io/kf
 | `FLTR_MAX_BODY_SIZE` | No | `10 MB` | Maximum request body size (e.g., `5 MB`, `1 GB`, `512 KB`) |
 | `FLTR_ADDR` | No | `:8080` | Address where the proxy listens |
 | `LOG_LEVEL` | No | `info` | Log level, such as `debug`, `info`, or `warn` |
+| `LOG_FORMAT` | No | `text` | Log format: `text` or `json` (`json` only writes to stdout) |
 
 ## 🚫 Block rules format
 
