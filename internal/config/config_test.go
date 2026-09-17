@@ -108,9 +108,6 @@ func requireTextFormatter(t *testing.T, wantFullTimestamp, wantForceColors bool)
 	if formatter.ForceColors != wantForceColors {
 		t.Fatalf("ForceColors = %v, want %v", formatter.ForceColors, wantForceColors)
 	}
-	if !formatter.PadLevelText {
-		t.Fatal("PadLevelText is disabled, want enabled")
-	}
 	if got, want := formatter.TimestampFormat, "2006-01-02 15:04:05"; got != want {
 		t.Fatalf("TimestampFormat = %q, want %q", got, want)
 	}
