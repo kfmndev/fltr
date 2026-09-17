@@ -1,0 +1,48 @@
+project_name: fltr
+
+builds:
+  - main: .
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+    targets:
+      - linux_amd64
+      - linux_arm64
+
+archives:
+  - formats: [binary]
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  use: git
+  groups:
+    - title: Features
+      regexp: "^feat(\\([[:word:]-]+\\))?!?:"
+      order: 0
+    - title: Bug fixes
+      regexp: "^fix(\\([[:word:]-]+\\))?!?:"
+      order: 1
+    - title: Refactors
+      regexp: "^refactor(\\([[:word:]-]+\\))?!?:"
+      order: 2
+    - title: Other
+      order: 999
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "^ci:"
+      - "^build:"
+      - "^style:"
+
+release:
+  github:
+    owner: kfmndev
+    name: fltr
+  extra_files:
+    - glob: ./dist/CHANGELOG.md
