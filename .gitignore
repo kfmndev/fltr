@@ -40,6 +40,7 @@ Thumbs.db
 /bin/
 /dist/
 /build/
+/site/
 
 # Vendor directory (if used)
 vendor/

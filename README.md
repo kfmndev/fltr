@@ -10,22 +10,20 @@
 
 - Request content matched against block rules (case-insensitive by default)
 - Example block rule `rule1: password, secret`
-- Blocked, when **ALL** terms from **ANY** rule match
 - Allowed requests forwarded to "allow upstream"
 - Blocked requests to "block upstream" (if configured) or discarded
-- Method, headers, body, and query parameters are preserved; path is **DISCARDED**
 
-## ✅ Requirements
+> [!IMPORTANT]
+> A request is blocked only when **ALL** terms from **ANY** rule match. Matching covers the request body, the `Title`/`Message` headers, and the `title`/`message` query parameters.
 
-- Go 1.25 or newer
-- A JSON file containing the block rules
-- An HTTP service to receive allowed requests
+> [!NOTE]
+> Method, headers, body, and query parameters are preserved; the path is **DISCARDED**.
 
-## 🚀 Run it
+## 🚀 Quick start
 
-Start `fltr` with the minimal config: one block rule and an allow upstream.
+Requirements: [Go 1.25](https://go.dev) or newer (to run from source), a JSON file containing the block rules, and an HTTP service to receive allowed requests.
 
-### block_rules.json
+Create a `block_rules.json`:
 
 ```json
 {
@@ -33,32 +31,22 @@ Start `fltr` with the minimal config: one block rule and an allow upstream.
 }
 ```
 
-### FLTR_ALLOW_UPSTREAM
-
-Set the environment variable temporarily like this:
+Point fltr at your allow upstream:
 
 ```properties
 export FLTR_ALLOW_UPSTREAM=http://allow.example.com
 ```
 
-To make it permanent, add this to the `~/.bashrc` (or your shell's equivalent).
+Then run it, whichever way suits you:
 
-Alternatively, the command can be prepended with the variable:
-
-```properties
-FLTR_ALLOW_UPSTREAM=http://allow.example.com \
+```sh
+# From source
 go run .
-```
 
-## 🐳 Run it with Docker
+# From a pre-built binary (download from a GitHub release)
+fltr
 
-Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmndev/fltr`. They are built for `linux/amd64` and `linux/arm64`.
-
-As they are based on [`linuxserver/docker-baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/), it is recommended to set `PUID` and `GUID` to avoid file permission issues, see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for more details.
-
-### Docker Run
-
-```properties
+# With Docker
 docker run -d \
   --name fltr \
   -p 8080:8080 \
@@ -67,94 +55,11 @@ docker run -d \
   ghcr.io/kfmndev/fltr
 ```
 
-### Docker Compose
+## 📚 Documentation
 
-```yml
-services:
-  fltr:
-    image: ghcr.io/kfmndev/fltr
-    container_name: fltr
-    ports:
-      - 8080:8080
-    environment:
-      - FLTR_ALLOW_UPSTREAM=http://allow.example.com
-    volumes:
-      - ./block_rules.json:/config/block_rules.json:ro
-    restart: unless-stopped
-```
+The full documentation lives at [kfmndev.github.io/fltr](https://kfmndev.github.io/fltr/):
 
-### Image tags
-
-The image is published under several tags, depending on what triggered the build:
-
-- Every push to `main`: `ghcr.io/kfmndev/fltr:main` and `ghcr.io/kfmndev/fltr:sha-<short-sha>`, where `<short-sha>` is the commit's short hash.
-- Every **git** version tag (e.g. `v1.0.0`): `latest`, plus the version split into `1`, `1.0`, and `1.0.0`.
-
-So `ghcr.io/kfmndev/fltr:latest` tracks the most recent release, and `ghcr.io/kfmndev/fltr:1.0.0` pins the image to a specific version.
-
-## 🔧 Configuration
-
-| Variable | Required | Default | Description |
-| --- | --- | --- | --- |
-| `FLTR_ALLOW_UPSTREAM` | Yes | | URL for requests that do not match any block rules |
-| `FLTR_BLOCK_UPSTREAM` | No | | URL for requests that match any block rules |
-| `FLTR_BLOCK_RULES_FILE` | No | `block_rules.json` | Path to the JSON block rules file |
-| `FLTR_CASE_SENSITIVE` | No | `false` | Enable case-sensitive rule matching |
-| `FLTR_MAX_BODY_SIZE` | No | `10 MB` | Maximum request body size (e.g., `5 MB`, `1 GB`, `512 KB`) |
-| `FLTR_ADDR` | No | `:8080` | Address where the proxy listens |
-| `LOG_LEVEL` | No | `info` | Log level, such as `debug`, `info`, or `warn` |
-| `LOG_FORMAT` | No | `text` | Log format: `text` or `json` (`json` only writes to stdout) |
-
-## 🚫 Block rules format
-
-The block rules file is a JSON object. Its keys name rules, and each value is a non-empty array of non-empty terms. A request matches when all terms in at least one rule are present. Terms are trimmed when the file is loaded. The service refuses to start if a rule has no terms or contains a blank term after trimming.
-
-```json
-{
-    "credentials": ["password", "secret"],
-    "identity": ["private-key"]
-}
-```
-
-With the example above, a request is blocked when it contains both `password` and `secret`, or when it contains `private-key`, somewhere in its body, the `Title`/`Message` headers, or the `title`/`message` query parameters.
-
-## 🧪 Try a request
-
-With the example configuration running, send a request that matches the `credentials` rule:
-
-```sh
-curl -X POST http://localhost:8080 \
-    -H 'Content-Type: text/plain' \
-    -H 'Title: account details' \
-    -d 'password secret'
-```
-
-Send a request that matches no rule to route it to the allow upstream:
-
-```sh
-curl -X POST http://localhost:8080 \
-    -H 'Content-Type: text/plain' \
-    -d 'hello service'
-```
-
-## ⚙️ How it works
-
-During startup, an HTTP `HEAD` request is sent to each configured upstream before it starts listening. Any HTTP response is considered reachable, including error status codes. Network and TLS failures abort the startup process.
-
-By default, the block rules are loaded from the `block_rules.json` file in the current directory. The environment variable `FLTR_BLOCK_RULES_FILE` can specify an alternative path.
-
-When a request reaches the proxy, its body, the `Title` and `Message` headers, and the `title` and `message` query parameters are matched against the block rules. By default, matching is case-insensitive, which is achieved by converting both the combined request text and the block terms to lowercase before matching. This can be configured to be case-sensitive using the `FLTR_CASE_SENSITIVE` environment variable. A request is blocked when all the terms in any configured rule appear in the combined text.
-
-Allowed requests go to `FLTR_ALLOW_UPSTREAM`. Blocked requests go to `FLTR_BLOCK_UPSTREAM` when it is configured. Without a block upstream, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`.
-
-It forwards requests to the configured upstream URL without preserving the incoming path. The original method, headers, and body are kept. Query parameters already present in the upstream URL are combined with the incoming query parameters.
-
-Request bodies are limited in size by `FLTR_MAX_BODY_SIZE` (default 10 MB); larger requests are rejected with the `413 Content Too Large` status code.
-
-## ✅ Testing
-
-Run the unit tests with:
-
-```sh
-go test ./...
-```
+- [Configuration](https://kfmndev.github.io/fltr/configuration/): every environment variable and its defaults
+- [Block rules](https://kfmndev.github.io/fltr/block-rules/): file format and matching semantics
+- [Docker](https://kfmndev.github.io/fltr/docker/): images, tags, compose setup, PUID/PGID
+- [Development](https://kfmndev.github.io/fltr/development/): how it works, testing, and building
