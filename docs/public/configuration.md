@@ -19,9 +19,9 @@ fltr is configured entirely through environment variables.
 
 The allow upstream is the only required variable; fltr refuses to start without it.
 
-!!! note "Persistent environment variables"
+!!! note "Setting environment variables"
 
-    Set variables temporarily with `export FLTR_ALLOW_UPSTREAM=http://allow.example.com`, permanently via `~/.bashrc` (or your shell's equivalent), or by prepending them to the start command.
+    Set variables temporarily with `#!sh export FLTR_ALLOW_UPSTREAM=http://allow.example.com`, permanently by adding the same command to your `~/.bashrc` (or your shell's equivalent), or prepend them to every `fltr` command.
 
 ## Upstreams
 

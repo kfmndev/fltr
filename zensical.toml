@@ -28,16 +28,15 @@ features = [
   "navigation.tracking",
   "search.highlight",
   "content.action.edit",
-  "content.action.view",
+  "content.code.copy",
 ]
 
 [project.theme.icon]
 edit = "material/pencil"
-view = "material/eye"
 
 [[project.theme.palette]]
 scheme = "slate"
-primary = "indigo"
+primary = "blue"
 accent = "deep orange"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to light mode"
@@ -45,7 +44,7 @@ media = "(prefers-color-scheme: dark)"
 
 [[project.theme.palette]]
 scheme = "default"
-primary = "indigo"
+primary = "blue"
 accent = "deep orange"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to dark mode"
@@ -55,6 +54,12 @@ media = "(prefers-color-scheme: light)"
 admonition = {}
 pymdownx.details = {}
 pymdownx.superfences = {}
+pymdownx.inlinehilite = {}
+pymdownx.snippets = {}
+pymdownx.tabbed.alternate_style = true
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
 pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
 pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
 

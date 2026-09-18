@@ -5,7 +5,7 @@ icon: lucide/home
 # Home
 
 <div align="center">
-<img src="https://github.com/kfmndev/fltr/blob/main/assets/logo.svg?raw=true" alt="fltr logo" width="250px" style="max-width:50%"/>
+<img src="assets/logo.svg" alt="fltr logo" width="250px" style="max-width:50%"/>
 <br>
 <b>Lightweight HTTP reverse proxy for content-based request filtering and routing</b>
 <br style="margin-bottom: .5rem">
@@ -25,11 +25,9 @@ fltr inspects the body of every request, along with the `Title`/`Message` header
 
 ## Quick start
 
-Start fltr with the minimal config: one block rule and an allow upstream.
+Start `fltr` with the minimal config: one block rule and an allow upstream.
 
-`block_rules.json`:
-
-```json
+```json title="block_rules.json"
 {
     "rule": ["password", "secret"]
 }
@@ -37,8 +35,9 @@ Start fltr with the minimal config: one block rule and an allow upstream.
 
 Set the allow upstream and run:
 
-```properties
-FLTR_ALLOW_UPSTREAM=http://allow.example.com fltr
+```sh
+FLTR_ALLOW_UPSTREAM=http://allow.example.com \
+fltr
 ```
 
 The examples under [Block rules](block-rules.md) send requests that hit both the blocked and allowed paths.

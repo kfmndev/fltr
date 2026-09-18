@@ -6,7 +6,9 @@ icon: lucide/filter
 
 The block rules file is a JSON object. Its keys name rules, and each value is a non-empty array of non-empty terms:
 
-```json
+
+
+```json title="block_rules.json"
 {
     "credentials": ["password", "secret"],
     "identity": ["private-key"]

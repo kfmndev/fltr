@@ -8,7 +8,7 @@ Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmn
 
 ## Docker Run
 
-```properties
+```docker
 docker run -d \
   --name fltr \
   -p 8080:8080 \
@@ -23,7 +23,7 @@ docker run -d \
 
 ## Docker Compose
 
-```yml
+```yml title="docker-compose.yml"
 services:
   fltr:
     image: ghcr.io/kfmndev/fltr
