@@ -38,7 +38,7 @@ Incoming query parameters are appended to whatever query string is already part 
 The request body exceeded `FLTR_MAX_BODY_SIZE` (default 10 MB). Raise it if the contents are legitimate.
 
 **The upstream doesn't know the client's IP or original URL**
-fltr does not set `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`. Forward those headers at the proxy in front of fltr itself.
+fltr does not set or forward `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto` to the upstream, so adding them at a proxy in front of fltr will not make them reach the upstream.
 
 ## Docker
 
