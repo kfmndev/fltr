@@ -31,4 +31,4 @@ At startup, fltr sends an HTTP `HEAD` request to each configured upstream before
 
     The allow upstream must be reachable at startup. fltr aborts if it cannot connect.
 
-Blocked requests go to the block upstream when `FLTR_BLOCK_UPSTREAM` is configured. Without one, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`. See [Development](development.md) for the full request flow.
+Blocked requests go to the block upstream when `FLTR_BLOCK_UPSTREAM` is configured. Without one, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`. See [How it works](how-it-works.md) for the full request flow.
