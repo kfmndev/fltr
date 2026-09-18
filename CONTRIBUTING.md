@@ -30,7 +30,7 @@ The hooks run formatting, `go mod tidy`, `go vet`, a compile check, and the test
 
 ## Submitting
 
-Open a pull request against `main` with a Conventional-Commits-style title. CI runs build, test, lint, and the link check; keep it green and a maintainer will take it from there.
+Open a pull request against `main` with a Conventional-Commits-style title. CI runs the build and tests, static analysis, and the link check; keep it green and a maintainer will take it from there.
 
 ## Reporting issues
 

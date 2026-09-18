@@ -29,7 +29,7 @@ For each incoming request:
 
 - The HTTP method, ordinary end-to-end headers, and body are preserved; hop-by-hop headers are removed by the reverse proxy. The incoming URL path is **dropped** and the request is sent to the upstream URL as configured.
 - Query parameters already present in the upstream URL are combined with the incoming query parameters.
-- fltr never sets `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`. It does, however, pass through any such headers a proxy in front of it supplied. When fltr fronts your upstream directly, the upstream sees the hop from fltr, not the original client's details.
+- fltr never sets or forwards `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`: the reverse proxy strips any such headers a proxy in front of it supplied before forwarding. When fltr fronts your upstream directly, the upstream sees the hop from fltr, not the original client's details.
 
 ## Where each variable fits
 

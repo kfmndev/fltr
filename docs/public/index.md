@@ -15,7 +15,7 @@ icon: lucide/home
 <a href="https://github.com/kfmndev/fltr/actions?query=branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/kfmndev/fltr/build.yml?branch=main&style=flat-square" alt="GitHub Actions Workflow Status"></a>
 </div>
 
-fltr inspects the body of every request, along with the `Title`/`Message` headers and the `title`/`message` query parameters, and matches that content against the block rules. A request that matches any rule is blocked; everything else is forwarded to the allow upstream. Method, headers, body, and query parameters are preserved. The incoming path is discarded.
+fltr inspects the body of every request, along with the `Title`/`Message` headers and the `title`/`message` query parameters, and matches that content against the block rules. A request that matches any rule is blocked; everything else is forwarded to the allow upstream. Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is dropped.
 
 ## Requirements
 

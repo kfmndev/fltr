@@ -8,7 +8,7 @@ Only the latest released version of fltr receives security fixes.
 
 Do **not** open a public issue for a suspected vulnerability.
 
-Use GitHub's private vulnerability reporting: on the repository, go to **Security → Report a vulnerability**. If you cannot use it, contact the maintainers directly through a private channel and include:
+Use GitHub's private vulnerability reporting: on the repository, go to **Security → Report a vulnerability**. If you cannot use it, contact the maintainer [@kfmndev](https://github.com/kfmndev) through their GitHub profile and ask for a private channel before sharing details. Include:
 
 - a description of the issue and its impact
 - steps to reproduce (commands, configuration, request samples)

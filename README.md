@@ -17,7 +17,7 @@
 > A request is blocked only when **ALL** terms from **ANY** rule match. Matching covers the request body, the `Title`/`Message` headers, and the `title`/`message` query parameters.
 
 > [!NOTE]
-> Method, headers, body, and query parameters are preserved; the path is **DISCARDED**.
+> Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is **dropped**.
 
 ## 🚀 Quick start
 

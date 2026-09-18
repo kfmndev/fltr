@@ -29,7 +29,7 @@ The value must be a human size such as `10 MB`, `512 KB`, or `1 GB` (decimal uni
 A Block Rule matched: every Term of that rule was found in the Searchable Content. Remember both `Title`/`title` are searched in headers *and* query parameters, matching is case-insensitive unless you set `FLTR_CASE_SENSITIVE=true`, and `strings.Contains` means terms match inside larger words — a rule with the term `password` also matches `PasswordManager`. `LOG_LEVEL=debug` logs which rule and terms matched.
 
 **My request reached the upstream but at the wrong path**
-The incoming path is discarded by design; requests arrive at the upstream URL exactly as configured. See [Forwarding behaviour](how-it-works.md#forwarding-behaviour).
+The incoming URL path is dropped by design; requests arrive at the upstream URL exactly as configured. See [Forwarding behaviour](how-it-works.md#forwarding-behaviour).
 
 **The upstream saw different query parameters than I sent**
 Incoming query parameters are appended to whatever query string is already part of the upstream URL; duplicates are preserved.
@@ -43,4 +43,4 @@ fltr does not set or forward `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwar
 ## Docker
 
 **Permission errors reading the rules file**
-The images are based on `linuxserver/docker-baseimage-alpine` and run as `abc:abc`. Set `PUID`/`PGID` to your user so the bind-mounted `block_rules.json` is readable; see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/), and [Docker](docker.md) for the setup.
+The images are built from [`linuxserver/docker-baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/) (`ghcr.io/linuxserver/baseimage-alpine`) and run as `abc:abc`. Set `PUID`/`PGID` to your user so the bind-mounted `block_rules.json` is readable; see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/), and [Docker](docker.md) for the setup.

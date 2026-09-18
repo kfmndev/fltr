@@ -38,7 +38,7 @@ go test ./... -coverprofile=coverage.out
 
 ## Commits
 
-Commits must follow [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`, `docs:`, ...). The `commit-msg` hook enforces this, and the changelog and release titles are grouped by prefix.
+Commits must follow [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`, `docs:`, ...). The `commit-msg` hook enforces this, and the changelog is grouped by prefix.
 
 ## Docs site
 
