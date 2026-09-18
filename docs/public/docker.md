@@ -1,3 +1,7 @@
+---
+icon: lucide/container
+---
+
 # Docker
 
 Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmndev/fltr`. They are built for `linux/amd64` and `linux/arm64`.

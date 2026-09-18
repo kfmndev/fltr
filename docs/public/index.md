@@ -1,3 +1,7 @@
+---
+icon: lucide/home
+---
+
 # Home
 
 <div align="center">

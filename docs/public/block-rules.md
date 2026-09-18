@@ -1,3 +1,7 @@
+---
+icon: lucide/filter
+---
+
 # Block rules
 
 The block rules file is a JSON object. Its keys name rules, and each value is a non-empty array of non-empty terms:

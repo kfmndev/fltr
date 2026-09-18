@@ -1,3 +1,7 @@
+---
+icon: lucide/settings
+---
+
 # Configuration
 
 fltr is configured entirely through environment variables.

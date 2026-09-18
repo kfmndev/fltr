@@ -1,3 +1,7 @@
+---
+icon: lucide/code
+---
+
 # Development
 
 ## How it works
