@@ -8,20 +8,20 @@
 
 ## 🎯 TL;DR
 
-- Request content matched against block rules (case-insensitive by default)
-- Example block rule `rule1: password, secret`
-- Allowed requests forwarded to "allow upstream"
-- Blocked requests to "block upstream" (if configured) or discarded
+- Request content matched against Block Rules (case-insensitive by default)
+- Example Block Rule `rule: password, secret`
+- Allowed requests forwarded to the Allow Upstream
+- Blocked requests to the Block Upstream (if configured) or Discarded
 
 > [!IMPORTANT]
-> A request is blocked only when **ALL** terms from **ANY** rule match. Matching covers the request body, the `Title`/`Message` headers, and the `title`/`message` query parameters.
+> A request is Blocked only when **ALL** Terms from **ANY** Block Rule match. Matching covers the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters.
 
 > [!NOTE]
-> Method, headers, body, and query parameters are preserved; the path is **DISCARDED**.
+> Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is **dropped**.
 
 ## 🚀 Quick start
 
-Requirements: [Go 1.25](https://go.dev) or newer (to run from source), a JSON file containing the block rules, and an HTTP service to receive allowed requests.
+Requirements: [Go 1.25](https://go.dev) or newer (to run from source), a JSON file containing the Block Rules, and an HTTP service to receive Allowed requests.
 
 Create a `block_rules.json`:
 
@@ -31,9 +31,9 @@ Create a `block_rules.json`:
 }
 ```
 
-Point fltr at your allow upstream:
+Point fltr at your Allow Upstream:
 
-```properties
+```sh
 export FLTR_ALLOW_UPSTREAM=http://allow.example.com
 ```
 
@@ -62,4 +62,12 @@ The full documentation lives at [kfmndev.github.io/fltr](https://kfmndev.github.
 - [Configuration](https://kfmndev.github.io/fltr/configuration/): every environment variable and its defaults
 - [Block rules](https://kfmndev.github.io/fltr/block-rules/): file format and matching semantics
 - [Docker](https://kfmndev.github.io/fltr/docker/): images, tags, compose setup, PUID/PGID
-- [Development](https://kfmndev.github.io/fltr/development/): how it works, testing, and building
+- [How it works](https://kfmndev.github.io/fltr/how-it-works/): startup, matching, and routing
+- [Troubleshooting](https://kfmndev.github.io/fltr/troubleshooting/): common failures and fixes
+- [Development](https://kfmndev.github.io/fltr/development/): project layout, testing, building, and releases
+
+## Contributing
+
+- [Contributing](CONTRIBUTING.md): setup, commit conventions, and PR flow
+- [Security](SECURITY.md): how to report a vulnerability privately
+- [Code of Conduct](CODE_OF_CONDUCT.md)

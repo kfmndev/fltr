@@ -19,7 +19,7 @@ docker run -d \
 
 !!! tip
 
-    The images are based on [`linuxserver/docker-baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/). Set `PUID` and `PGID` to avoid file permission issues, see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for details.
+    The images are built from [`linuxserver/docker-baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/) (`ghcr.io/linuxserver/baseimage-alpine`). Set `PUID` and `PGID` to avoid file permission issues, see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for details.
 
 ## Docker Compose
 

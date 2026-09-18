@@ -8,16 +8,16 @@ fltr is configured entirely through environment variables.
 
 | Variable | Required | Default | Description |
 | --- | --- | --- | --- |
-| `FLTR_ALLOW_UPSTREAM` | Yes | | URL for requests that do not match any block rules |
-| `FLTR_BLOCK_UPSTREAM` | No | | URL for requests that match any block rules |
-| `FLTR_BLOCK_RULES_FILE` | No | `block_rules.json` | Path to the JSON block rules file |
-| `FLTR_CASE_SENSITIVE` | No | `false` | Enable case-sensitive rule matching |
-| `FLTR_MAX_BODY_SIZE` | No | `10 MB` | Maximum request body size (e.g., `5 MB`, `1 GB`, `512 KB`) |
+| `FLTR_ALLOW_UPSTREAM` | Yes | | URL for requests that do not match any Block Rules |
+| `FLTR_BLOCK_UPSTREAM` | No | | URL for requests that match any Block Rules |
+| `FLTR_BLOCK_RULES_FILE` | No | `block_rules.json` | Path to the JSON Block Rules file |
+| `FLTR_CASE_SENSITIVE` | No | `false` | Enable case-sensitive Block Rule matching. Invalid values fall back to case-insensitive matching |
+| `FLTR_MAX_BODY_SIZE` | No | `10 MB` | Maximum request body size, using decimal units (e.g., `5 MB` = 5,000,000 bytes, `1 GB`, `512 KB`) |
 | `FLTR_ADDR` | No | `:8080` | Address where the proxy listens |
-| `LOG_LEVEL` | No | `info` | Log level, such as `debug`, `info`, or `warn` |
-| `LOG_FORMAT` | No | `text` | Log format: `text` or `json` (`json` only writes to stdout) |
+| `LOG_LEVEL` | No | `info` | Log level: `trace`, `debug`, `info`, `warning` (`warn` also works), `error`, `fatal`, or `panic`. Invalid values fall back to `info` |
+| `LOG_FORMAT` | No | `text` | Log format: `text` (stderr) or `json` (stdout). Invalid values fall back to `text` |
 
-The allow upstream is the only required variable; fltr refuses to start without it.
+The Allow Upstream is the only required variable; fltr refuses to start without it.
 
 !!! note "Setting environment variables"
 
@@ -29,6 +29,6 @@ At startup, fltr sends an HTTP `HEAD` request to each configured upstream before
 
 !!! abstract "Important"
 
-    The allow upstream must be reachable at startup. fltr aborts if it cannot connect.
+    The Allow Upstream must be reachable at startup. fltr aborts if it cannot connect.
 
-Blocked requests go to the block upstream when `FLTR_BLOCK_UPSTREAM` is configured. Without one, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`. See [Development](development.md) for the full request flow.
+Blocked requests go to the Block Upstream when `FLTR_BLOCK_UPSTREAM` is configured. Without one, Blocked requests are Discarded, and the proxy returns `200 Request blocked, discarded`. See [How it works](how-it-works.md) for the full request flow.

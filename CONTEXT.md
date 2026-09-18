@@ -52,5 +52,12 @@ _Avoid_: drop target, deny upstream
 
 **Discarded**:
 The fate of a blocked request when no block upstream is configured: it is
-dropped and never reaches any upstream.
-_Avoid_: dropped, swallowed
+not forwarded and never reaches any upstream.
+_Avoid_: swallowed, ignored
+
+### Forwarding
+
+**Dropped Path**:
+The fate of the incoming URL path: fltr does not forward it, so requests reach
+the upstream URL exactly as configured.
+_Avoid_: discarded path, stripped path, ignored path
