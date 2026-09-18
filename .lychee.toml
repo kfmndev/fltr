@@ -9,7 +9,7 @@ exclude = [
 ]
 
 # Exclude LICENSE.md from link checking.
-exclude_paths = ['./LICENSE.md']
+exclude_path = ['(^|/)LICENSE\.md$']
 
 # Local hostnames in compose/localhost snippets, and GitHub rate limiting.
 accept = ["100..=399", "429"]
