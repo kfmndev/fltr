@@ -12,7 +12,7 @@ Symptoms first, causes and fixes below each one. See [How it works](how-it-works
 Set the allow upstream: `export FLTR_ALLOW_UPSTREAM=https://allow.example.com`. It is the only required variable.
 
 **`FLTR_ALLOW_UPSTREAM is unreachable` (or the block upstream equivalent)**
-fltr sent a `HEAD` request and got no HTTP response at all. Check the URL, DNS, and connectivity; self-signed TLS certificates also fail this check. An HTTP error response (404, 500, ...) is fine — any response proves the upstream is reachable.
+fltr sent a `HEAD` request and got no HTTP response at all. Check the URL, DNS, and connectivity — self-signed TLS certificates fail here too. Any HTTP response, even an error status, proves the upstream is reachable.
 
 **`could not load block rules`**
 The rules file is missing, unreadable, or invalid JSON. Check the path (default `block_rules.json` in the current directory, or `FLTR_BLOCK_RULES_FILE`), and validate the JSON.
