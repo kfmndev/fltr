@@ -24,7 +24,7 @@ pymdownx.superfences = {}   # nesting arbitrary content
 - **Collapsible:** `??? <type>` (collapsed) / `???+ <type>` (initially expanded) — requires `pymdownx.details`.
 - Inline blocks (sidebar): `!!! info inline end "..."` (right) / `!!! info inline "..."` (left); must be declared before the content block.
 - Nesting works when `pymdownx.superfences` is enabled.
-- Per-type icons via `[project.theme.icon.admonition]` (`<type> = "<icon>"`); 13 types each have a distinct default icon (Octicons/FontAwesome sets selectable).
+- Per-type icons via `[project.theme.icon.admonition]` (`<type> = "<icon>"`); 12 types each have a distinct default icon (Octicons/FontAwesome sets selectable).
 
 ### Supported admonition types (12)
 
