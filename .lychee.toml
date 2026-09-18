@@ -1,0 +1,13 @@
+# Placeholder URLs used in the docs' examples - never meant to resolve.
+exclude = [
+  '^(https?://)?([a-z0-9-]+\.)*example\.com',
+  '^(https?://)?localhost(:\d+)?',
+  '^(https?://)?127\.0\.0\.1(:\d+)?',
+  # Temporary: pages that only exist once this branch merges and the docs
+  # deploy runs. Remove after the deploy lands on main.
+  '^https://kfmndev\.github\.io/fltr/(how-it-works|troubleshooting)/',
+]
+
+# Local hostnames in compose/localhost snippets, and GitHub rate limiting.
+accept = ["100..=399", "429"]
+max_retries = 2
