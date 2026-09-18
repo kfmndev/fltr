@@ -1,0 +1,40 @@
+---
+icon: lucide/route
+---
+
+# How it works
+
+fltr is a content-based HTTP request filter: it inspects the Searchable Content of every request, matches it against the Block Rules, and routes the request by its verdict. Matching is binary; the rules have no rank or precedence over each other.
+
+## Startup
+
+Before fltr starts listening, it:
+
+1. Reads the configuration and validates each upstream URL (only `http` and `https` with a hostname are accepted).
+2. Sends an HTTP `HEAD` request to each configured upstream. Any HTTP response counts as reachable, including error status codes; network and TLS failures abort startup.
+3. Loads the Block Rules from `block_rules.json`, or the file named by `FLTR_BLOCK_RULES_FILE`. A rule with no terms, or a blank term after trimming, aborts startup.
+
+## Request flow
+
+For each incoming request:
+
+1. **Read**: the body is read up to `FLTR_MAX_BODY_SIZE` (default 10 MB). A larger body is rejected with `413 Content Too Large`.
+2. **Assemble**: the Searchable Content is built from the request body, the `Title`/`Message` header values, and the `title`/`message` query parameter values. Nothing in the URL path is inspected.
+3. **Match**: each Block Rule is checked: it *matches* when every Term of that rule is found in the Searchable Content. A request matching any rule is Blocked; a request matching no rule is Allowed. See [Block rules](block-rules.md).
+4. **Route** by verdict:
+   - **Allowed**: forwarded to the Allow Upstream.
+   - **Blocked**: forwarded to the Block Upstream when `FLTR_BLOCK_UPSTREAM` is configured; otherwise Discarded, and fltr responds with `200 Request blocked, discarded`.
+
+## Forwarding behaviour
+
+- The HTTP method, headers, and body are preserved. The incoming path is **discarded** — the request is sent to the upstream URL as configured.
+- Query parameters already present in the upstream URL are combined with the incoming query parameters.
+- fltr never sets `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`. It does, however, pass through any such headers a proxy in front of it supplied. When fltr fronts your upstream directly, the upstream sees the hop from fltr, not the original client's details.
+
+## Where each variable fits
+
+- `FLTR_ALLOW_UPSTREAM` and `FLTR_BLOCK_UPSTREAM`: step 4 (routing). See [Configuration](configuration.md) for reachability semantics.
+- `FLTR_BLOCK_RULES_FILE`: startup (rules loading).
+- `FLTR_CASE_SENSITIVE`: step 3 (matching).
+- `FLTR_MAX_BODY_SIZE`: step 1 (body reading).
+- `LOG_LEVEL` and `LOG_FORMAT`: logging only; they do not affect filtering or routing.

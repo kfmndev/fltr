@@ -53,4 +53,6 @@ The examples under [Block rules](block-rules.md) send requests that hit both the
 - [Configuration](configuration.md): every environment variable and its defaults
 - [Block rules](block-rules.md): file format and matching semantics
 - [Docker](docker.md): images, tags, compose setup
-- [Development](development.md): how it works, testing, and building
+- [How it works](how-it-works.md): startup, matching, and routing
+- [Troubleshooting](troubleshooting.md): common failures and fixes
+- [Development](development.md): project layout, testing, building, and releases

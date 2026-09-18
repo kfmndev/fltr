@@ -10,6 +10,8 @@ nav = [
   "configuration.md",
   "block-rules.md",
   "docker.md",
+  "how-it-works.md",
+  "troubleshooting.md",
   "development.md",
 ]
 edit_uri = "edit/main/docs/public/"

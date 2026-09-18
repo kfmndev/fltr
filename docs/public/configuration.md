@@ -11,11 +11,11 @@ fltr is configured entirely through environment variables.
 | `FLTR_ALLOW_UPSTREAM` | Yes | | URL for requests that do not match any block rules |
 | `FLTR_BLOCK_UPSTREAM` | No | | URL for requests that match any block rules |
 | `FLTR_BLOCK_RULES_FILE` | No | `block_rules.json` | Path to the JSON block rules file |
-| `FLTR_CASE_SENSITIVE` | No | `false` | Enable case-sensitive rule matching |
-| `FLTR_MAX_BODY_SIZE` | No | `10 MB` | Maximum request body size (e.g., `5 MB`, `1 GB`, `512 KB`) |
+| `FLTR_CASE_SENSITIVE` | No | `false` | Enable case-sensitive rule matching. Invalid values fall back to case-insensitive matching |
+| `FLTR_MAX_BODY_SIZE` | No | `10 MB` | Maximum request body size, using decimal units (e.g., `5 MB` = 5,000,000 bytes, `1 GB`, `512 KB`) |
 | `FLTR_ADDR` | No | `:8080` | Address where the proxy listens |
-| `LOG_LEVEL` | No | `info` | Log level, such as `debug`, `info`, or `warn` |
-| `LOG_FORMAT` | No | `text` | Log format: `text` or `json` (`json` only writes to stdout) |
+| `LOG_LEVEL` | No | `info` | Log level: `trace`, `debug`, `info`, `warning` (`warn` also works), `error`, `fatal`, or `panic`. Invalid values fall back to `info` |
+| `LOG_FORMAT` | No | `text` | Log format: `text` (stderr) or `json` (stdout). Invalid values fall back to `text` |
 
 The allow upstream is the only required variable; fltr refuses to start without it.
 

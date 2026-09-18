@@ -33,7 +33,7 @@ Create a `block_rules.json`:
 
 Point fltr at your allow upstream:
 
-```properties
+```sh
 export FLTR_ALLOW_UPSTREAM=http://allow.example.com
 ```
 
@@ -62,4 +62,12 @@ The full documentation lives at [kfmndev.github.io/fltr](https://kfmndev.github.
 - [Configuration](https://kfmndev.github.io/fltr/configuration/): every environment variable and its defaults
 - [Block rules](https://kfmndev.github.io/fltr/block-rules/): file format and matching semantics
 - [Docker](https://kfmndev.github.io/fltr/docker/): images, tags, compose setup, PUID/PGID
-- [Development](https://kfmndev.github.io/fltr/development/): how it works, testing, and building
+- [How it works](https://kfmndev.github.io/fltr/how-it-works/): startup, matching, and routing
+- [Troubleshooting](https://kfmndev.github.io/fltr/troubleshooting/): common failures and fixes
+- [Development](https://kfmndev.github.io/fltr/development/): project layout, testing, building, and releases
+
+## Contributing
+
+- [Contributing](CONTRIBUTING.md): setup, commit conventions, and PR flow
+- [Security](SECURITY.md): how to report a vulnerability privately
+- [Code of Conduct](CODE_OF_CONDUCT.md)

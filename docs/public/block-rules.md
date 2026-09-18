@@ -20,7 +20,7 @@ With the example above, a request is blocked when it contains both `password` an
 ## Matching semantics
 
 - A request matches a rule when **every term** of that rule is found in the searchable content. A request matching no rule is allowed.
-- The searchable content is the request body, the `Title`/`Message` header values, and the `title`/`message` query parameter values.
+- The searchable content is the request body, the `Title`/`Message` header values, and the `title`/`message` query parameter values. Header names are matched regardless of spelling, and both the `Title` and `title` spellings are searched in the query parameters too.
 - Matching is case-insensitive by default: both the searchable content and the terms are lowercased before matching. Set `FLTR_CASE_SENSITIVE=true` for case-sensitive matching.
 - Nothing is matched in the URL path, only the body, headers, and query parameters listed above.
 
