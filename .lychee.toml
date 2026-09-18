@@ -3,12 +3,13 @@ exclude = [
   '^(https?://)?([a-z0-9-]+\.)*example\.com',
   '^(https?://)?localhost(:\d+)?',
   '^(https?://)?127\.0\.0\.1(:\d+)?',
-  # Canonical notice inside the unmodifiable GPL license text.
-  '^https://fsf\.org/',
   # Temporary: pages that only exist once this branch merges and the docs
   # deploy runs. Remove after the deploy lands on main.
   '^https://kfmndev\.github\.io/fltr/(how-it-works|troubleshooting)/',
 ]
+
+# Exclude LICENSE.md from link checking.
+exclude_paths = ['./LICENSE.md']
 
 # Local hostnames in compose/localhost snippets, and GitHub rate limiting.
 accept = ["100..=399", "429"]
