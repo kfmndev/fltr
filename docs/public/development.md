@@ -45,7 +45,7 @@ Commits must follow [Conventional Commits](https://www.conventionalcommits.org) 
 The documentation site is built with [Zensical](https://zensical.org) from the public docs sources:
 
 ```sh
-pip install zensical
+pip install "zensical==0.0.62"
 zensical build --clean
 ```
 

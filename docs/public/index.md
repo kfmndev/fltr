@@ -15,17 +15,17 @@ icon: lucide/home
 <a href="https://github.com/kfmndev/fltr/actions?query=branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/kfmndev/fltr/build.yml?branch=main&style=flat-square" alt="GitHub Actions Workflow Status"></a>
 </div>
 
-fltr inspects the body of every request, along with the `Title`/`Message` headers and the `title`/`message` query parameters, and matches that content against the block rules. A request that matches any rule is blocked; everything else is forwarded to the allow upstream. Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is dropped.
+fltr inspects the body of every request, along with the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters, and matches that content against the Block Rules. A request that matches any Block Rule is Blocked; everything else is forwarded to the Allow Upstream. Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is dropped.
 
 ## Requirements
 
 - Go 1.25 or newer (when running from source)
-- A JSON file containing the block rules
-- An HTTP service to receive allowed requests
+- A JSON file containing the Block Rules
+- An HTTP service to receive Allowed requests
 
 ## Quick start
 
-Start `fltr` with the minimal config: one block rule and an allow upstream.
+Start `fltr` with the minimal config: one Block Rule and an Allow Upstream.
 
 ```json title="block_rules.json"
 {
@@ -33,14 +33,14 @@ Start `fltr` with the minimal config: one block rule and an allow upstream.
 }
 ```
 
-Set the allow upstream and run:
+Set the Allow Upstream and run:
 
 ```sh
 FLTR_ALLOW_UPSTREAM=http://allow.example.com \
 fltr
 ```
 
-The examples under [Block rules](block-rules.md) send requests that hit both the blocked and allowed paths.
+The examples under [Block rules](block-rules.md) show a request that is Blocked and one that is Allowed.
 
 ## Installation
 

@@ -26,11 +26,11 @@ The hooks run formatting, `go mod tidy`, `go vet`, a compile check, and the test
 
 - Follow [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`, `docs:`, ...).
 - Documentation changes live under the public docs sources; build the site with `zensical build --clean` to verify.
-- Link every behavior you document, and keep new user-facing pages using the project's glossary (see `CONTEXT.md`).
+- Cross-link related pages, and use the project's glossary (see `CONTEXT.md`) for new user-facing pages.
 
 ## Submitting
 
-Open a pull request against `main` with a Conventional-Commits-style title. CI runs the build and tests, static analysis, and the link check; keep it green and a maintainer will take it from there.
+Open a pull request against `main` with a Conventional-Commits-style title. CI runs the build and tests, static analysis, the link check, and the docs build; keep it green and a maintainer will take it from there.
 
 ## Reporting issues
 
