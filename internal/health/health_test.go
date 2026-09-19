@@ -33,11 +33,10 @@ func TestLivenessEndpoint(t *testing.T) {
 	handler := New(spy)
 
 	tests := []struct {
-		name      string
-		method    string
-		path      string
-		wantBody  string
-		wantInner bool
+		name     string
+		method   string
+		path     string
+		wantBody string
 	}{
 		{name: "GET", method: http.MethodGet, path: Path, wantBody: "ok"},
 		{name: "HEAD", method: http.MethodHead, path: Path},
@@ -51,23 +50,29 @@ func TestLivenessEndpoint(t *testing.T) {
 			req := httptest.NewRequest(test.method, test.path, strings.NewReader("term"))
 
 			handler.ServeHTTP(rec, req)
+			assertLivenessResponse(t, rec, test.wantBody)
 
-			if rec.Code != http.StatusOK {
-				t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
-			}
-			if got := rec.Body.String(); got != test.wantBody {
-				t.Fatalf("body = %q, want %q", got, test.wantBody)
-			}
-			if got := rec.Header().Get("Content-Type"); got != "text/plain; charset=utf-8" {
-				t.Fatalf("Content-Type = %q", got)
-			}
-			if got := rec.Header().Get("Cache-Control"); got != "no-store" {
-				t.Fatalf("Cache-Control = %q", got)
-			}
 			if spy.called {
 				t.Fatal("inner handler was called for the liveness endpoint")
 			}
 		})
+	}
+}
+
+func assertLivenessResponse(t *testing.T, rec *httptest.ResponseRecorder, wantBody string) {
+	t.Helper()
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
+	}
+	if got := rec.Body.String(); got != wantBody {
+		t.Fatalf("body = %q, want %q", got, wantBody)
+	}
+	if got := rec.Header().Get("Content-Type"); got != "text/plain; charset=utf-8" {
+		t.Fatalf("Content-Type = %q", got)
+	}
+	if got := rec.Header().Get("Cache-Control"); got != "no-store" {
+		t.Fatalf("Cache-Control = %q", got)
 	}
 }
 
