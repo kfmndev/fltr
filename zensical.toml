@@ -30,6 +30,8 @@ features = [
   "navigation.instant.prefetch",
   "navigation.instant.progress",
   "navigation.tracking",
+  "navigation.sections",
+  "navigation.path",
   "search.highlight",
   "content.action.edit",
   "content.code.copy",
