@@ -59,11 +59,16 @@ docker run -d \
 
 The full documentation lives at [kfmndev.github.io/fltr](https://kfmndev.github.io/fltr/):
 
-- [Environment variables](https://kfmndev.github.io/fltr/configuration/environment-variables/): every environment variable and its defaults
-- [Block rules](https://kfmndev.github.io/fltr/configuration/block-rules/): file format and matching semantics
-- [Docker](https://kfmndev.github.io/fltr/docker/): images, tags, compose setup, PUID/PGID
-- [How it works](https://kfmndev.github.io/fltr/how-it-works/): startup, matching, and routing
-- [Troubleshooting](https://kfmndev.github.io/fltr/troubleshooting/): common failures and fixes
+- [Quickstart](https://kfmndev.github.io/fltr/getting-started/): one Block Rule, one upstream, first request
+- [Installation](https://kfmndev.github.io/fltr/getting-started/installation/): pre-built binary, Docker, or source
+- [How it works](https://kfmndev.github.io/fltr/guide/how-it-works/): startup, matching, and routing
+- [Docker](https://kfmndev.github.io/fltr/guide/docker/): images, tags, compose setup, PUID/PGID
+- [Troubleshooting](https://kfmndev.github.io/fltr/guide/troubleshooting/): common failures and fixes
+- [FAQ](https://kfmndev.github.io/fltr/guide/faq/): recurring questions about matching and forwarding
+- [Environment variables](https://kfmndev.github.io/fltr/reference/environment-variables/): every environment variable and its defaults
+- [Block rules](https://kfmndev.github.io/fltr/reference/block-rules/): file format and matching semantics
+- [HTTP behavior](https://kfmndev.github.io/fltr/reference/http-behavior/): status codes, headers, and path handling
+- [Glossary](https://kfmndev.github.io/fltr/reference/glossary/): the terms fltr uses
 - [Development](https://kfmndev.github.io/fltr/development/): project layout, testing, building, and releases
 
 ## Contributing

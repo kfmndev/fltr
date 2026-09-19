@@ -6,17 +6,29 @@ repo_url = "https://github.com/kfmndev/fltr"
 repo_name = "kfmndev/fltr"
 docs_dir = "docs/public"
 nav = [
-  "index.md",
-  { "Configuration" = [
-    { "Block rules" = "configuration/block-rules.md" },
-    { "Environment variables" = "configuration/environment-variables.md" },
+  { "Home" = "index.md" },
+  { "Getting started" = [
+    { "Quickstart" = "getting-started/index.md" },
+    { "Installation" = "getting-started/installation.md" },
   ] },
-  "docker.md",
-  "how-it-works.md",
-  "troubleshooting.md",
-  "development.md",
+  { "Guide" = [
+    "guide/index.md",
+    { "How it works" = "guide/how-it-works.md" },
+    { "Docker" = "guide/docker.md" },
+    { "Troubleshooting" = "guide/troubleshooting.md" },
+    { "FAQ" = "guide/faq.md" },
+  ] },
+  { "Reference" = [
+    "reference/index.md",
+    { "Environment variables" = "reference/environment-variables.md" },
+    { "Block rules" = "reference/block-rules.md" },
+    { "HTTP behavior" = "reference/http-behavior.md" },
+    { "Glossary" = "reference/glossary.md" },
+  ] },
+  { "Development" = "development.md" },
 ]
 edit_uri = "edit/main/docs/public/"
+copyright = "&copy; 2026 kfmndev"
 
 [project.theme]
 variant = "modern"
@@ -31,7 +43,10 @@ features = [
   "navigation.instant.progress",
   "navigation.tracking",
   "navigation.sections",
+  "navigation.indexes",
   "navigation.path",
+  "navigation.top",
+  "toc.follow",
   "search.highlight",
   "content.action.edit",
   "content.code.copy",

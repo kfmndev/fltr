@@ -17,42 +17,27 @@ icon: lucide/home
 
 fltr inspects the body of every request, along with the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters, and matches that content against the Block Rules. A request that matches any Block Rule is Blocked; everything else is forwarded to the Allow Upstream. Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is dropped.
 
-## Requirements
-
-- Go 1.25 or newer (when running from source)
-- A JSON file containing the Block Rules
-- An HTTP service to receive Allowed requests
-
-## Quick start
-
-Start `fltr` with the minimal config: one Block Rule and an Allow Upstream.
-
-```json title="block_rules.json"
-{
-    "rule": ["password", "secret"]
-}
-```
-
-Set the Allow Upstream and run:
-
-```sh
-FLTR_ALLOW_UPSTREAM=http://allow.example.com \
-fltr
-```
-
-The examples under [Block rules](configuration/block-rules.md) show a request that is Blocked and one that is Allowed.
-
-## Installation
-
-- **Pre-built binary**: download `fltr_<version>_linux_amd64` (or `linux_arm64`) from a [GitHub release](https://github.com/kfmndev/fltr/releases) and run it directly. The quickest way to try it out.
-- **Docker**: images are published to `ghcr.io/kfmndev/fltr`, see [Docker](docker.md).
-- **From source**: use `go build ./...`.
-
 ## Where to go next
 
-- [Environment variables](configuration/environment-variables.md): every environment variable and its defaults
-- [Block rules](configuration/block-rules.md): file format and matching semantics
-- [Docker](docker.md): images, tags, compose setup
-- [How it works](how-it-works.md): startup, matching, and routing
-- [Troubleshooting](troubleshooting.md): common failures and fixes
+**Getting started**
+
+- [Quickstart](getting-started/index.md): the shortest path to a running proxy
+- [Installation](getting-started/installation.md): pre-built binary, Docker, or source
+
+**Guide**
+
+- [How it works](guide/how-it-works.md): startup, matching, and routing
+- [Docker](guide/docker.md): images, tags, compose setup
+- [Troubleshooting](guide/troubleshooting.md): common failures and fixes
+- [FAQ](guide/faq.md): recurring questions about matching and forwarding
+
+**Reference**
+
+- [Environment variables](reference/environment-variables.md): every environment variable and its defaults
+- [Block rules](reference/block-rules.md): file format and matching semantics
+- [HTTP behavior](reference/http-behavior.md): status codes, headers, and path handling
+- [Glossary](reference/glossary.md): the terms fltr uses
+
+**Project**
+
 - [Development](development.md): project layout, testing, building, and releases

@@ -54,4 +54,4 @@ The built `site/` is what gets published to GitHub Pages; do not edit it by hand
 
 ## Releases
 
-Releases are cut with [goreleaser](https://goreleaser.com): each `v`-prefixed git tag triggers a build of Linux binaries (amd64 and arm64), a checksum file, and a changelog assembled from the conventional commits. Docker images are published separately, see [Docker](docker.md#image-tags).
+Releases are cut with [goreleaser](https://goreleaser.com): each `v`-prefixed git tag triggers a build of Linux binaries (amd64 and arm64), a checksum file, and a changelog assembled from the conventional commits. Docker images are published separately, see [Docker](guide/docker.md#image-tags).
