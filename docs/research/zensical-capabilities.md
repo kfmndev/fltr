@@ -2,7 +2,7 @@
 
 **Ticket:** kfmndev/fltr#8 ("Zensical capabilities research"), part of map #7
 **Date:** 2026-09-17
-**Sources:** verified against zensical.org/docs (Zensical 0.1.0, launched Nov 5) — not Material for MkDocs docs. Cross-checked against the Zensical backlog/GitHub where the docs are silent.
+**Sources:** verified against zensical.org/docs (current stable release 0.0.62; the site banner advertises an upcoming 0.1.0 launch on Nov 5, 2026, alongside Studio/Spark and the Material for MkDocs EOL extension to May 5, 2027) — not Material for MkDocs docs. Cross-checked against the Zensical backlog/GitHub where the docs are silent.
 
 ## 1. Admonitions / callouts
 
