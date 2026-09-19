@@ -34,8 +34,8 @@ For each incoming request:
 
 ## Where each variable fits
 
-- `FLTR_ALLOW_UPSTREAM` and `FLTR_BLOCK_UPSTREAM`: step 4 (routing). See [Configuration](configuration.md) for reachability semantics.
+- `FLTR_ALLOW_UPSTREAM` and `FLTR_BLOCK_UPSTREAM`: step 5 (routing). See [Configuration](configuration.md) for reachability semantics.
 - `FLTR_BLOCK_RULES_FILE`: startup (rules loading).
-- `FLTR_CASE_SENSITIVE`: step 3 (matching).
-- `FLTR_MAX_BODY_SIZE`: step 1 (body reading).
+- `FLTR_CASE_SENSITIVE`: step 4 (matching).
+- `FLTR_MAX_BODY_SIZE`: step 2 (body reading).
 - `LOG_LEVEL` and `LOG_FORMAT`: logging only; they do not affect filtering or routing.

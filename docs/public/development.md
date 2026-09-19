@@ -9,6 +9,7 @@ icon: lucide/code
 - `main.go`: startup — reads the environment, validates upstreams, loads the rules, and wires the pieces together.
 - `internal/config`: logging setup and Block Rule file loading.
 - `internal/filter`: the request handler — body reading, Searchable Content assembly, matching, and verdict routing.
+- `internal/health`: the reserved Liveness Endpoint handler that wraps the content filter.
 - `internal/proxy`: upstream proxies and the startup reachability check.
 - `docker/`: the Dockerfile and the s6-overlay service definitions for the published images.
 
