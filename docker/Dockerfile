@@ -23,9 +23,9 @@ ENV FLTR_BLOCK_RULES_FILE=/config/block_rules.json \
 
 EXPOSE 8080
 
-# Probe the reserved Liveness Endpoint on the proxy listener. The port is
-# derived from FLTR_ADDR with POSIX parameter expansion: ${FLTR_ADDR##*:}
-# strips the longest prefix matching "*:", so ":8080" -> "8080" and
-# "0.0.0.0:9090" -> "9090".
+# Probe the reserved Liveness Endpoint; host and port follow FLTR_ADDR, falling
+# back to loopback when it binds all interfaces.
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD wget -q -O /dev/null "http://127.0.0.1:${FLTR_ADDR##*:}/healthz"
+  CMD HOST="${FLTR_ADDR%:*}"; PORT="${FLTR_ADDR##*:}"; \
+      case "$HOST" in ""|0.0.0.0|"::"|"[::]") HOST=127.0.0.1;; esac; \
+      wget -q -O /dev/null "http://${HOST}:${PORT}/healthz"
