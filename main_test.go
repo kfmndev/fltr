@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"fltr/internal/filter"
+	"fltr/internal/health"
 )
 
 func TestNewServerDefaults(t *testing.T) {
@@ -27,9 +28,13 @@ func TestNewServerDefaults(t *testing.T) {
 		t.Fatalf("newServer returned error: %v", err)
 	}
 
-	handler, ok := server.Handler.(filter.ContentFilter)
+	wrapped, ok := server.Handler.(health.Handler)
 	if !ok {
-		t.Fatalf("server handler has type %T, want filter.ContentFilter", server.Handler)
+		t.Fatalf("server handler has type %T, want health.Handler", server.Handler)
+	}
+	handler, ok := wrapped.Inner.(filter.ContentFilter)
+	if !ok {
+		t.Fatalf("inner handler has type %T, want filter.ContentFilter", wrapped.Inner)
 	}
 	if handler.BlockProxy != nil || handler.CaseSensitive {
 		t.Fatal("default handler has unexpected block proxy or case sensitivity")
@@ -56,7 +61,7 @@ func TestNewServerWithBlockUpstreamAndOptions(t *testing.T) {
 	if err != nil {
 		t.Fatalf("newServer returned error: %v", err)
 	}
-	handler := server.Handler.(filter.ContentFilter)
+	handler := server.Handler.(health.Handler).Inner.(filter.ContentFilter)
 	if handler.BlockProxy == nil || !handler.CaseSensitive || handler.MaxBodySize != 5_000 {
 		t.Fatal("configured handler does not contain the requested options")
 	}

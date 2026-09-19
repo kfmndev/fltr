@@ -18,6 +18,14 @@ RUN \
 
 COPY docker/root/ /
 
-ENV FLTR_BLOCK_RULES_FILE=/config/block_rules.json
+ENV FLTR_BLOCK_RULES_FILE=/config/block_rules.json \
+    FLTR_ADDR=:8080
 
 EXPOSE 8080
+
+# Probe the reserved Liveness Endpoint; host and port follow FLTR_ADDR, falling
+# back to loopback when it binds all interfaces.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD HOST="${FLTR_ADDR%:*}"; PORT="${FLTR_ADDR##*:}"; \
+      case "$HOST" in ""|0.0.0.0|"::"|"[::]") HOST=127.0.0.1;; esac; \
+      wget -q -O /dev/null "http://${HOST}:${PORT}/healthz"

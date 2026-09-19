@@ -55,6 +55,19 @@ The fate of a blocked request when no block upstream is configured: it is
 not forwarded and never reaches any upstream.
 _Avoid_: swallowed, ignored
 
+### Health and liveness
+
+**Liveness Endpoint**:
+The reserved path `/healthz`, answered by fltr itself with `200` whenever it
+can serve HTTP. Liveness is not readiness: the Liveness Endpoint never contacts
+an upstream and says nothing about whether requests can be forwarded.
+_Avoid_: health check, readiness endpoint
+
+**Reserved Path**:
+A path fltr answers itself before content filtering, so it is never inspected,
+matched against Block Rules, or forwarded to any upstream.
+_Avoid_: special path, internal route
+
 ### Forwarding
 
 **Dropped Path**:
