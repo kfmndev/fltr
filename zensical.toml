@@ -7,8 +7,10 @@ repo_name = "kfmndev/fltr"
 docs_dir = "docs/public"
 nav = [
   "index.md",
-  "configuration.md",
-  "block-rules.md",
+  { "Configuration" = [
+    { "Block rules" = "configuration/block-rules.md" },
+    { "Environment variables" = "configuration/environment-variables.md" },
+  ] },
   "docker.md",
   "how-it-works.md",
   "troubleshooting.md",

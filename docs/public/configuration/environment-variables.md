@@ -2,7 +2,7 @@
 icon: lucide/settings
 ---
 
-# Configuration
+# Environment variables
 
 fltr is configured entirely through environment variables.
 
@@ -31,4 +31,4 @@ At startup, fltr sends an HTTP `HEAD` request to each configured upstream before
 
     The Allow Upstream must be reachable at startup. fltr aborts if it cannot connect.
 
-Blocked requests go to the Block Upstream when `FLTR_BLOCK_UPSTREAM` is configured. Without one, Blocked requests are Discarded, and the proxy returns `200 Request blocked, discarded`. See [How it works](how-it-works.md) for the full request flow.
+Blocked requests go to the Block Upstream when `FLTR_BLOCK_UPSTREAM` is configured. Without one, Blocked requests are Discarded, and the proxy returns `200 Request blocked, discarded`. See [How it works](../how-it-works.md) for the full request flow.

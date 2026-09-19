@@ -59,8 +59,8 @@ docker run -d \
 
 The full documentation lives at [kfmndev.github.io/fltr](https://kfmndev.github.io/fltr/):
 
-- [Configuration](https://kfmndev.github.io/fltr/configuration/): every environment variable and its defaults
-- [Block rules](https://kfmndev.github.io/fltr/block-rules/): file format and matching semantics
+- [Environment variables](https://kfmndev.github.io/fltr/configuration/environment-variables/): every environment variable and its defaults
+- [Block rules](https://kfmndev.github.io/fltr/configuration/block-rules/): file format and matching semantics
 - [Docker](https://kfmndev.github.io/fltr/docker/): images, tags, compose setup, PUID/PGID
 - [How it works](https://kfmndev.github.io/fltr/how-it-works/): startup, matching, and routing
 - [Troubleshooting](https://kfmndev.github.io/fltr/troubleshooting/): common failures and fixes

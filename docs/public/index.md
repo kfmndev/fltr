@@ -40,7 +40,7 @@ FLTR_ALLOW_UPSTREAM=http://allow.example.com \
 fltr
 ```
 
-The examples under [Block rules](block-rules.md) show a request that is Blocked and one that is Allowed.
+The examples under [Block rules](configuration/block-rules.md) show a request that is Blocked and one that is Allowed.
 
 ## Installation
 
@@ -50,8 +50,8 @@ The examples under [Block rules](block-rules.md) show a request that is Blocked 
 
 ## Where to go next
 
-- [Configuration](configuration.md): every environment variable and its defaults
-- [Block rules](block-rules.md): file format and matching semantics
+- [Environment variables](configuration/environment-variables.md): every environment variable and its defaults
+- [Block rules](configuration/block-rules.md): file format and matching semantics
 - [Docker](docker.md): images, tags, compose setup
 - [How it works](how-it-works.md): startup, matching, and routing
 - [Troubleshooting](troubleshooting.md): common failures and fixes

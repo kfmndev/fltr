@@ -4,7 +4,7 @@ icon: lucide/route
 
 # How it works
 
-fltr is a content-based HTTP request filter: it inspects the Searchable Content of every request, matches it against the Block Rules, and routes the request by its verdict. Matching is binary; the Block Rules have no rank or precedence over each other.
+**fltr** is a content-based HTTP request filter: it inspects the **Searchable Content** of every request, matches it against the **Block Rules**, and routes the request by its verdict. **Matching** is binary; the Block Rules have no rank or precedence over each other.
 
 ## Startup
 
@@ -21,7 +21,7 @@ For each incoming request:
 1. **Health**: a request to the Reserved Path `/healthz` is answered by fltr itself and never reaches the filter or an upstream. `GET` and `HEAD` return `200`; any other method returns `405`.
 2. **Read**: the body is read up to `FLTR_MAX_BODY_SIZE` (default 10 MB). A larger body is rejected with `413 request too large`.
 3. **Assemble**: the Searchable Content is built from the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters. Nothing in the URL path is inspected.
-4. **Match**: each Block Rule is checked: it *matches* when every Term of that rule is found in the Searchable Content. A request matching any Block Rule is Blocked; a request matching no Block Rule is Allowed. See [Block rules](block-rules.md).
+4. **Match**: each Block Rule is checked: it *matches* when every Term of that rule is found in the Searchable Content. A request matching any Block Rule is Blocked; a request matching no Block Rule is Allowed. See [Block rules](configuration/block-rules.md).
 5. **Route** by verdict:
     - **Allowed**: forwarded to the Allow Upstream.
     - **Blocked**: forwarded to the Block Upstream when `FLTR_BLOCK_UPSTREAM` is configured; otherwise Discarded, and fltr responds with `200 Request blocked, discarded`.
@@ -34,7 +34,7 @@ For each incoming request:
 
 ## Where each variable fits
 
-- `FLTR_ALLOW_UPSTREAM` and `FLTR_BLOCK_UPSTREAM`: step 5 (routing). See [Configuration](configuration.md) for reachability semantics.
+- `FLTR_ALLOW_UPSTREAM` and `FLTR_BLOCK_UPSTREAM`: step 5 (routing). See [Environment variables](configuration/environment-variables.md#upstreams) for reachability semantics.
 - `FLTR_BLOCK_RULES_FILE`: startup (rules loading).
 - `FLTR_CASE_SENSITIVE`: step 4 (matching).
 - `FLTR_MAX_BODY_SIZE`: step 2 (body reading).
