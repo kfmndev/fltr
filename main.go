@@ -9,6 +9,7 @@ import (
 
 	"fltr/internal/config"
 	"fltr/internal/filter"
+	"fltr/internal/health"
 	"fltr/internal/proxy"
 
 	"github.com/docker/go-units"
@@ -104,7 +105,7 @@ func newServer() (*http.Server, error) {
 	// Initialize and start the HTTP server
 	server := &http.Server{
 		Addr:              config.EnvOr("FLTR_ADDR", ":8080"),
-		Handler:           filter.ContentFilter{BlockRules: blockRules, CaseSensitive: caseSensitive, AllowProxy: allowProxy, BlockProxy: blockProxy, MaxBodySize: maxBodySize},
+		Handler:           health.New(filter.ContentFilter{BlockRules: blockRules, CaseSensitive: caseSensitive, AllowProxy: allowProxy, BlockProxy: blockProxy, MaxBodySize: maxBodySize}),
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       15 * time.Second,
 		WriteTimeout:      30 * time.Second,
