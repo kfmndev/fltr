@@ -37,6 +37,14 @@ services:
     restart: unless-stopped
 ```
 
+## Healthcheck
+
+The image ships a `HEALTHCHECK` that probes `http://127.0.0.1:<port>/healthz` every 30 seconds. It derives `<port>` from `FLTR_ADDR` using POSIX parameter expansion: `${FLTR_ADDR##*:}` strips everything up to and including the last `:`, so `:8080` becomes `8080` and `0.0.0.0:9090` becomes `9090`. Change `FLTR_ADDR` and the probe follows; the container reports healthy as long as fltr can answer on that port.
+
+```sh
+docker inspect --format '{{.State.Health.Status}}' fltr
+```
+
 ## Image tags
 
 The image is published under several tags, depending on what triggered the build:
