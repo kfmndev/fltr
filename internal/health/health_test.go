@@ -38,9 +38,9 @@ func TestLivenessEndpoint(t *testing.T) {
 		path     string
 		wantBody string
 	}{
-		{name: "GET", method: http.MethodGet, path: Path, wantBody: "ok"},
-		{name: "HEAD", method: http.MethodHead, path: Path},
-		{name: "query ignored", method: http.MethodGet, path: Path + "?term=blocked", wantBody: "ok"},
+		{name: "GET", method: http.MethodGet, path: LivenessPath, wantBody: "ok"},
+		{name: "HEAD", method: http.MethodHead, path: LivenessPath},
+		{name: "query ignored", method: http.MethodGet, path: LivenessPath + "?term=blocked", wantBody: "ok"},
 	}
 
 	for _, test := range tests {
@@ -84,7 +84,7 @@ func TestLivenessEndpointRejectsOtherMethods(t *testing.T) {
 		t.Run(method, func(t *testing.T) {
 			*spy = spyHandler{}
 			rec := httptest.NewRecorder()
-			req := httptest.NewRequest(method, Path, nil)
+			req := httptest.NewRequest(method, LivenessPath, nil)
 
 			handler.ServeHTTP(rec, req)
 

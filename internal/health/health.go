@@ -6,7 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-const Path = "/healthz"
+const LivenessPath = "/healthz"
 
 type Handler struct {
 	Inner http.Handler
@@ -17,7 +17,7 @@ func New(inner http.Handler) Handler {
 }
 
 func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != Path {
+	if r.URL.Path != LivenessPath {
 		h.Inner.ServeHTTP(w, r)
 		return
 	}
