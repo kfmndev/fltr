@@ -6,6 +6,20 @@ icon: lucide/route
 
 **fltr** is a content-based HTTP request filter: it inspects the **Searchable Content** of every request, matches it against the **Block Rules**, and routes the request by its verdict. **Matching** is binary; the Block Rules have no rank or precedence over each other.
 
+```mermaid
+flowchart LR
+    R(<b>📦 Request</b>) --> BR(<b>📋 Block Rules</b>)
+    BR -- No Rules match ---> A(<b>✅ Allowed</b>)
+    BR -- Any Rule matches ---> B(<b>❌ Blocked</b>)
+
+    classDef blue fill:#4287ff1F,stroke:#4287ff
+    classDef green fill:#00c7531F,stroke:#00c753
+    classDef red fill:#ff1a471F,stroke:#ff1a47
+    class BR blue
+    class A green
+    class B red
+```
+
 ## Startup
 
 Before fltr starts listening, it:
@@ -17,6 +31,30 @@ Before fltr starts listening, it:
 ## Request flow
 
 For each incoming request:
+
+```mermaid
+flowchart TD
+    A(<b>Incoming request</b>)
+    B(<b>Liveness Check</b><br/>GET / HEAD → 200<br/>Other methods → 405)
+    A -- Reserved Path /healthz? --> B
+    A -- Other Request --> C(<b>Read</b><br>Body ≤ <i>FLTR_MAX_BODY_SIZE</i>?)
+    C -- yes --> D(<b>Assemble</b><br>Searchable Content)
+    C -- no --> E(<b>Rejected</b><br>413 request too large)
+    D --> F(<b>Match</b><br>Block Rules)
+    F -- No Rules match --> G(<b>Allowed</b><br>Forward to Allow Upstream)
+    F -- Any Rule matches --> H(<i>FLTR_BLOCK_UPSTREAM</i> set?)
+    H -- yes --> I(<b>Blocked</b><br>Forward to Block Upstream)
+    H -- no --> J(<b>Discarded</b><br/>200 Request blocked, discarded)
+
+    classDef grey fill:#ffffff1F,stroke:#ffffff
+    classDef red fill:#ff1a471F,stroke:#ff1a47
+    classDef green fill:#00c7531F,stroke:#00c753
+    classDef blue fill:#4287ff1F,stroke:#4287ff
+    class B grey
+    class C,D,F,H blue
+    class E,I,J red
+    class G green
+```
 
 1. **Health**: a request to the Reserved Path `/healthz` is answered by fltr itself and never reaches the filter or an upstream. `GET` and `HEAD` return `200`; any other method returns `405`.
 2. **Read**: the body is read up to `FLTR_MAX_BODY_SIZE` (default 10 MB). A larger body is rejected with `413 request too large`.
