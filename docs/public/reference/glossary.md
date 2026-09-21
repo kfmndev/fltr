@@ -18,7 +18,7 @@ A single string a rule searches for within the Searchable Content.
 
 ### Match
 
-A rule-level outcome: every term in the rule appears in the Searchable Content. It is binary — a request either matches a rule or it does not, and rules have no rank or precedence over each other.
+A rule-level outcome: every term in the rule appears in the Searchable Content. Matching is binary. A request either matches a rule or it doesn't, and rules have no rank or precedence over each other.
 
 ### Searchable Content
 
@@ -28,11 +28,11 @@ The combined text fltr inspects: the request body, the `Title` and `Message` hea
 
 ### Allowed
 
-The verdict for a request that matches no Block Rule; such a request is forwarded to the Allow Upstream.
+The verdict for a request that matches no Block Rule. Such a request is forwarded to the Allow Upstream.
 
 ### Blocked
 
-The verdict for a request that matches at least one Block Rule; such a request is forwarded to the Block Upstream when configured, otherwise it is discarded.
+The verdict for a request that matches at least one Block Rule. Such a request is forwarded to the Block Upstream when configured. Otherwise it is discarded.
 
 ### Allow Upstream
 
@@ -44,13 +44,13 @@ The optional HTTP service that receives blocked requests. When not configured, b
 
 ### Discarded
 
-The fate of a blocked request when no Block Upstream is configured: it is not forwarded and never reaches any upstream.
+A blocked request with no Block Upstream configured is not forwarded and never reaches any upstream.
 
 ## Health and liveness
 
 ### Liveness Endpoint
 
-The Reserved Path `/healthz`, answered by fltr itself with `200` whenever it can serve HTTP. Liveness is not readiness: the Liveness Endpoint never contacts an upstream and says nothing about whether requests can be forwarded.
+The Reserved Path `/healthz`, answered by fltr itself with `200` whenever it can serve HTTP. Liveness is not readiness. The Liveness Endpoint never contacts an upstream and says nothing about whether requests can be forwarded.
 
 ### Reserved Path
 
@@ -60,4 +60,4 @@ A path fltr answers itself before content filtering, so it is never inspected, m
 
 ### Dropped Path
 
-The fate of the incoming URL path: fltr does not forward it, so requests reach the upstream URL exactly as configured.
+The incoming URL path is not forwarded, so requests reach the upstream URL exactly as configured.

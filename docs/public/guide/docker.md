@@ -6,7 +6,7 @@ icon: lucide/container
 
 Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmndev/fltr`. They are built for `linux/amd64` and `linux/arm64`.
 
-## Docker Run
+## Run with Docker
 
 ```docker
 docker run -d \
@@ -40,7 +40,7 @@ services:
 
 The image ships a `HEALTHCHECK` that probes `http://${HOST}:${PORT}/healthz` every 30 seconds.
 
-`FLTR_ADDR` provides `${HOST}` and `${PORT}` through POSIX shell parameter expansion (supported by `linuxserver/baseimage-alpine` which uses BusyBox `ash`), realising a split at the last colon. If the address binds all interfaces (`:8080`, `0.0.0.0:8080`, `[::]:8080`) the probe falls back to `127.0.0.1`.
+The probe command splits `FLTR_ADDR` at the last colon using POSIX shell parameter expansion, which `linuxserver/baseimage-alpine` supports through BusyBox `ash`. If the address binds all interfaces (`:8080`, `0.0.0.0:8080`, `[::]:8080`), the fallback is `127.0.0.1`.
 
 ```sh
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
@@ -69,4 +69,4 @@ The image is published under several tags, depending on what triggered the build
 - Every git version tag (e.g. `v1.0.0`): `fltr:latest`, plus the version split into `1`, `1.0`, and `1.0.0`.
 
 !!! warning
-    Only use the `latest` tag when you want to track the most recent release. It is recommended to pin a specific version to make sure nothing changes unattended.
+    Only use the `latest` tag when you want to track the most recent release. Pin a specific version to make sure nothing changes unattended.

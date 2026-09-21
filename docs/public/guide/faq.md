@@ -6,11 +6,11 @@ icon: lucide/message-circle-question
 
 ## Why was my request blocked when I did not expect it?
 
-A [**Block Rule**](../reference/block-rules.md) matches when **every** one of its terms appears anywhere in the [**Searchable Content**](../reference/block-rules.md#matching-semantics) — not just the body, but also the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters. Matching is case-insensitive by default and uses substring search, so a term `password` also matches `PasswordManager`. Set `LOG_LEVEL=debug` to see which rule and terms matched.
+A [**Block Rule**](../reference/block-rules.md) matches when **every** one of its terms appears anywhere in the [**Searchable Content**](../reference/block-rules.md#matching-semantics). Matching is case-insensitive by default and uses substring search, so a term `password` also matches `PasswordManager`. Set `LOG_LEVEL=debug` to see which rule and terms matched.
 
 ## Why did my request reach the upstream at a different path?
 
-The incoming URL path is dropped by design: fltr forwards requests to the upstream URL exactly as configured. See [Forwarding behavior](how-it-works.md#forwarding-behavior).
+The incoming URL path is dropped by design. fltr forwards requests to the upstream URL exactly as configured. See [Forwarding behavior](how-it-works.md#forwarding-behavior).
 
 ## Why does my upstream not see the client's IP or original URL?
 

@@ -14,7 +14,7 @@
 - Blocked requests to the **[Block Upstream](https://kfmndev.github.io/fltr/reference/environment-variables/#upstreams)** (if configured), or discarded
 
 > [!IMPORTANT]
-> A request is blocked only when **ALL** terms from **ANY** Block Rule match. Matching covers the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters.
+> A request is blocked only when **ALL** terms from **ANY** Block Rule match. Matching covers the [**Searchable Content**](https://kfmndev.github.io/fltr/reference/block-rules/#matching-semantics): the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters.
 
 > [!NOTE]
 > Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is **dropped**.

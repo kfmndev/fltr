@@ -14,7 +14,7 @@ Set the [**Allow Upstream**](../reference/environment-variables.md#upstreams): `
 
 ### `FLTR_ALLOW_UPSTREAM is unreachable` (or the [**Block Upstream**](../reference/environment-variables.md#upstreams) equivalent)
 
-fltr sent a `HEAD` request and got no HTTP response at all. Check the URL, DNS, and connectivity — self-signed TLS certificates fail here too. Any HTTP response, even an error status, proves the upstream is reachable.
+fltr sent a `HEAD` request and got no HTTP response at all. Check the URL, DNS, and connectivity. Self-signed TLS certificates fail here too. Any HTTP response, even an error status, proves the upstream is reachable.
 
 ### `could not load block rules`
 
@@ -32,15 +32,15 @@ The value must be a size such as 10 MB, 512 KB, or 1 GB (decimal units: 1 KB = 1
 
 ### I get `200 Request blocked, discarded` for a request I expected to be allowed
 
-A Block Rule matched: every term of that rule was found in the [**Searchable Content**](../reference/block-rules.md#matching-semantics). Remember matching also covers the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters; matching is case-insensitive unless you set `FLTR_CASE_SENSITIVE=true`; and `strings.Contains` means terms match inside larger words — a Block Rule with the term `password` also matches `PasswordManager`. `LOG_LEVEL=debug` logs which Block Rule and terms matched.
+A Block Rule matched. Every term of that rule was found in the [**Searchable Content**](../reference/block-rules.md#matching-semantics). Matching is case-insensitive unless you set `FLTR_CASE_SENSITIVE=true`. Because fltr uses `strings.Contains`, terms match inside larger words: a Block Rule with the term `password` also matches `PasswordManager`. `LOG_LEVEL=debug` logs which Block Rule and terms matched.
 
 ### My request reached the upstream but at the wrong path
 
-The incoming URL path is dropped by design; requests arrive at the upstream URL exactly as configured. See [Forwarding behavior](how-it-works.md#forwarding-behavior).
+The incoming URL path is dropped by design. Requests arrive at the upstream URL exactly as configured. See [Forwarding behavior](how-it-works.md#forwarding-behavior).
 
 ### The upstream saw different query parameters than I sent
 
-Incoming query parameters are appended to whatever query string is already part of the upstream URL; duplicates are preserved.
+Incoming query parameters are appended to whatever query string is already part of the upstream URL. Duplicates are preserved.
 
 ### `413 request too large`
 
@@ -48,10 +48,10 @@ The request body exceeded `FLTR_MAX_BODY_SIZE` (default 10 MB). Raise it if the 
 
 ### The upstream doesn't know the client's IP or original URL
 
-fltr does not set or forward `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto` to the upstream, so adding them at a proxy in front of fltr will not make them reach the upstream.
+fltr does not set or forward `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`. Adding them at a proxy in front of fltr will not make them reach the upstream.
 
 ## Docker
 
 ### Permission errors reading the rules file
 
-The images are built from [`ghcr.io/linuxserver/baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/pkgs/container/baseimage-alpine) and run as `abc:abc`. Set `PUID`/`PGID` to your user so the bind-mounted `block_rules.json` is readable; see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/), and [Docker](docker.md) for the setup.
+The images are built from [`ghcr.io/linuxserver/baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/pkgs/container/baseimage-alpine) and run as `abc:abc`. Set `PUID`/`PGID` to your user so the bind-mounted `block_rules.json` is readable. See [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) and [Docker](docker.md) for the setup.

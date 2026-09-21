@@ -14,7 +14,7 @@ go build ./...
 prek install --hook-type pre-commit --hook-type commit-msg
 ```
 
-The hooks run formatting, `go mod tidy`, `go vet`, a compile check, and the test suite on every commit; the `commit-msg` hook enforces Conventional Commits.
+The hooks run formatting, `go mod tidy`, `go vet`, a compile check, and the test suite on every commit. The `commit-msg` hook enforces Conventional Commits.
 
 ## Making changes
 
@@ -27,7 +27,8 @@ The hooks run formatting, `go mod tidy`, `go vet`, a compile check, and the test
 - Follow [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`, `docs:`, ...).
 - Documentation changes live under the public docs sources; build the site with `zensical build --clean` to verify.
 - Cross-link related pages, and use the project's glossary (see `CONTEXT.md`) for new user-facing pages.
-- Follow the terminology convention: multi-word terms keep capitals (`Block Rule`), single-word state terms are lowercase mid-sentence (`term`, `allowed`, `blocked`), and the first mention of a term on a page is bold and links to its dedicated page or, when it has none, the [Glossary](https://kfmndev.github.io/fltr/reference/glossary/). See the [Development page](https://kfmndev.github.io/fltr/development/#terminology) for the longer version.
+- Follow the terminology convention: multi-word terms keep capitals (`Block Rule`) and single-word state terms are lowercase mid-sentence (`term`, `allowed`, `blocked`).
+- Make the first mention of a term on a page bold, linking to its dedicated page or, when it has none, the [Glossary](https://kfmndev.github.io/fltr/reference/glossary/). See the [Development page](https://kfmndev.github.io/fltr/development/#terminology) for the longer version.
 
 ## Submitting
 
@@ -36,7 +37,7 @@ Open a pull request against `main` with a Conventional-Commits-style title. CI r
 ## Reporting issues
 
 - Bugs: open an issue with steps to reproduce, expected vs actual behavior, and your configuration (redact anything sensitive).
-- Vulnerabilities: do **not** open a public issue — see [SECURITY.md](SECURITY.md).
+- Vulnerabilities: do **not** open a public issue; see [SECURITY.md](SECURITY.md).
 
 ## License
 
