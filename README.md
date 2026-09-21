@@ -8,20 +8,20 @@
 
 ## 🎯 TL;DR
 
-- Request content matched against Block Rules (case-insensitive by default)
+- Request content matched against **[Block Rules](https://kfmndev.github.io/fltr/reference/glossary/#block-rule)** (case-insensitive by default)
 - Example Block Rule `rule: password, secret`
-- Allowed requests forwarded to the Allow Upstream
-- Blocked requests to the Block Upstream (if configured) or Discarded
+- Allowed requests forwarded to the **[Allow Upstream](https://kfmndev.github.io/fltr/reference/glossary/#allow-upstream)**
+- Blocked requests to the **[Block Upstream](https://kfmndev.github.io/fltr/reference/glossary/#block-upstream)** (if configured), or discarded
 
 > [!IMPORTANT]
-> A request is Blocked only when **ALL** Terms from **ANY** Block Rule match. Matching covers the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters.
+> A request is blocked only when **ALL** terms from **ANY** Block Rule match. Matching covers the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters.
 
 > [!NOTE]
 > Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is **dropped**.
 
 ## 🚀 Quick start
 
-Requirements: [Go 1.25](https://go.dev) or newer (to run from source), a JSON file containing the Block Rules, and an HTTP service to receive Allowed requests.
+Requirements: [Go 1.25](https://go.dev) or newer (to run from source), a JSON file containing the Block Rules, and an HTTP service to receive allowed requests.
 
 Create a `block_rules.json`:
 

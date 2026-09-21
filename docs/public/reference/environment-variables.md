@@ -20,14 +20,14 @@ At startup, fltr sends an HTTP `HEAD` request to each configured upstream before
 
 ### `FLTR_ALLOW_UPSTREAM`
 
-URL for requests that do not match any Block Rules. This is the only required variable; fltr refuses to start without it.
+URL for requests that do not match any [**Block Rules**](glossary.md#block-rule). This is the only required variable; fltr refuses to start without it.
 
 !!! danger "Important"
-    The Allow Upstream must be reachable at startup. fltr aborts if it cannot connect.
+    The [**Allow Upstream**](glossary.md#allow-upstream) must be reachable at startup. fltr aborts if it cannot connect.
 
 ### `FLTR_BLOCK_UPSTREAM`
 
-URL for requests that match any Block Rules. Without one, Blocked requests are Discarded, and the proxy returns `200 Request blocked, discarded`. See [How it works](../guide/how-it-works.md) for the full request flow.
+URL for requests that match any Block Rules. Without one, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`. See [How it works](../guide/how-it-works.md) for the full request flow.
 
 ## Block rules
 
@@ -42,7 +42,7 @@ Path to the JSON Block Rules file. Defaults to `block_rules.json` in the current
 
 ### `FLTR_CASE_SENSITIVE`
 
-Enable case-sensitive Block Rule matching. By default both the Searchable Content and the Terms are lowercased before matching; set this to `true` to match case-sensitively. Invalid values fall back to case-insensitive matching.
+Enable case-sensitive Block Rule matching. By default both the [**Searchable Content**](glossary.md#searchable-content) and the terms are lowercased before matching; set this to `true` to match case-sensitively. Invalid values fall back to case-insensitive matching.
 
 ## Request limits
 

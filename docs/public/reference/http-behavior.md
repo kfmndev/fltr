@@ -17,7 +17,7 @@ What fltr sends on the wire for every request, and the responses it produces its
 | `GET` or `HEAD` to `/healthz` | `200` | `ok` |
 | Any other method to `/healthz` | `405` | `method not allowed` |
 
-The Liveness Endpoint (`/healthz`) is a [Reserved Path](../guide/how-it-works.md): it is answered by fltr itself and never inspected, matched against Block Rules, or forwarded. Its responses carry `Cache-Control: no-store`, and the `405` sets `Allow: GET, HEAD`.
+The [**Liveness Endpoint**](glossary.md#liveness-endpoint) (`/healthz`) is a [**Reserved Path**](glossary.md#reserved-path): it is answered by fltr itself and never inspected, matched against Block Rules, or forwarded. Its responses carry `Cache-Control: no-store`, and the `405` sets `Allow: GET, HEAD`.
 
 ## Forwarding
 

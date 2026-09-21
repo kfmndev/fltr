@@ -7,9 +7,9 @@ icon: lucide/code
 ## Project layout
 
 - `main.go`: startup — reads the environment, validates upstreams, loads the rules, and wires the pieces together.
-- `internal/config`: logging setup and Block Rule file loading.
-- `internal/filter`: the request handler — body reading, Searchable Content assembly, matching, and verdict routing.
-- `internal/health`: the reserved Liveness Endpoint handler that wraps the content filter.
+- `internal/config`: logging setup and [**Block Rule**](reference/glossary.md#block-rule) file loading.
+- `internal/filter`: the request handler — body reading, [**Searchable Content**](reference/glossary.md#searchable-content) assembly, matching, and verdict routing.
+- `internal/health`: the reserved [**Liveness Endpoint**](reference/glossary.md#liveness-endpoint) handler that wraps the content filter.
 - `internal/proxy`: upstream proxies and the startup reachability check.
 - `docker/`: the Dockerfile and the s6-overlay service definitions for the published images.
 
@@ -51,6 +51,10 @@ zensical build --clean
 ```
 
 The built `site/` is what gets published to GitHub Pages; do not edit it by hand.
+
+## Terminology
+
+The docs follow a two-tier convention for domain terms. Multi-word terms keep their capitals in prose — `Block Rule`, `Allow Upstream`, `Block Upstream`, `Searchable Content`, `Liveness Endpoint`, `Reserved Path`, `Dropped Path`. Single-word state terms are lowercase except at the start of a sentence: `term`, `match`/`matching`, `allowed`, `blocked`, `discarded`. The first prose mention of any glossary term on a page is bold and links to its anchor in the [Glossary](reference/glossary.md); later mentions are plain. Short labels — table cells, diagram nodes, and step headings — keep their capitals. `CONTEXT.md` keeps full capitals throughout: it is the canonical glossary, not prose.
 
 ## Releases
 

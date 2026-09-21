@@ -10,19 +10,19 @@ Symptoms first, causes and fixes below each one. See [How it works](how-it-works
 
 ### `FLTR_ALLOW_UPSTREAM is required`
 
-Set the Allow Upstream: `export FLTR_ALLOW_UPSTREAM=https://allow.example.com`. It is the only required variable.
+Set the [**Allow Upstream**](../reference/glossary.md#allow-upstream): `export FLTR_ALLOW_UPSTREAM=https://allow.example.com`. It is the only required variable.
 
-### `FLTR_ALLOW_UPSTREAM is unreachable` (or the Block Upstream equivalent)
+### `FLTR_ALLOW_UPSTREAM is unreachable` (or the [**Block Upstream**](../reference/glossary.md#block-upstream) equivalent)
 
 fltr sent a `HEAD` request and got no HTTP response at all. Check the URL, DNS, and connectivity — self-signed TLS certificates fail here too. Any HTTP response, even an error status, proves the upstream is reachable.
 
 ### `could not load block rules`
 
-The Block Rules file is missing, unreadable, or invalid JSON. Check the path (default `block_rules.json` in the current directory, or `FLTR_BLOCK_RULES_FILE`), and validate the JSON.
+The [**Block Rules**](../reference/glossary.md#block-rule) file is missing, unreadable, or invalid JSON. Check the path (default `block_rules.json` in the current directory, or `FLTR_BLOCK_RULES_FILE`), and validate the JSON.
 
 ### `rule "..." has no terms` / `rule "..." has an empty term at index N`
 
-A Block Rule key maps to an empty array, or a Term is blank after trimming. Every Block Rule needs at least one non-empty Term.
+A Block Rule key maps to an empty array, or a term is blank after trimming. Every Block Rule needs at least one non-empty term.
 
 ### `invalid FLTR_MAX_BODY_SIZE`
 
@@ -32,7 +32,7 @@ The value must be a size such as 10 MB, 512 KB, or 1 GB (decimal units: 1 KB = 1
 
 ### I get `200 Request blocked, discarded` for a request I expected to be allowed
 
-A Block Rule matched: every Term of that rule was found in the Searchable Content. Remember matching also covers the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters; matching is case-insensitive unless you set `FLTR_CASE_SENSITIVE=true`; and `strings.Contains` means Terms match inside larger words — a Block Rule with the Term `password` also matches `PasswordManager`. `LOG_LEVEL=debug` logs which Block Rule and Terms matched.
+A Block Rule matched: every term of that rule was found in the [**Searchable Content**](../reference/glossary.md#searchable-content). Remember matching also covers the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters; matching is case-insensitive unless you set `FLTR_CASE_SENSITIVE=true`; and `strings.Contains` means terms match inside larger words — a Block Rule with the term `password` also matches `PasswordManager`. `LOG_LEVEL=debug` logs which Block Rule and terms matched.
 
 ### My request reached the upstream but at the wrong path
 
