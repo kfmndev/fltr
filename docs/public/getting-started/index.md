@@ -4,7 +4,7 @@ icon: lucide/rocket
 
 # Quickstart
 
-This gets fltr running locally with one [**Block Rule**](../reference/glossary.md#block-rule) and one [**Allow Upstream**](../reference/glossary.md#allow-upstream). For other ways to run it, see [Installation](installation.md).
+This gets fltr running locally with one [**Block Rule**](../reference/block-rules.md) and one [**Allow Upstream**](../reference/environment-variables.md#upstreams). For other ways to run it, see [Installation](installation.md).
 
 ## Requirements
 
@@ -33,7 +33,7 @@ By default fltr listens on `:8080` and reads `block_rules.json` from the current
 
 ## Send a request
 
-A request whose [**Searchable Content**](../reference/glossary.md#searchable-content) contains every term of a Block Rule is blocked:
+A request whose [**Searchable Content**](../reference/block-rules.md#matching-semantics) contains every term of a Block Rule is blocked:
 
 ```sh
 curl -X POST http://localhost:8080 \
@@ -42,4 +42,4 @@ curl -X POST http://localhost:8080 \
     -d 'password secret'
 ```
 
-With no [**Block Upstream**](../reference/glossary.md#block-upstream) configured, fltr answers `200 Request blocked, discarded`. Requests that match no Block Rule are forwarded to the Allow Upstream. [Block Rules](../reference/block-rules.md) shows both outcomes in full, and [HTTP behavior](../reference/http-behavior.md) documents every response fltr produces itself.
+With no [**Block Upstream**](../reference/environment-variables.md#upstreams) configured, fltr answers `200 Request blocked, discarded`. Requests that match no Block Rule are forwarded to the Allow Upstream. [Block Rules](../reference/block-rules.md) shows both outcomes in full, and [HTTP behavior](../reference/http-behavior.md) documents every response fltr produces itself.

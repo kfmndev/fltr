@@ -4,7 +4,7 @@ icon: lucide/download
 
 # Installation
 
-fltr ships as a pre-built binary, a Docker image, and source. All paths need the same two things: a JSON file containing the [**Block Rules**](../reference/glossary.md#block-rule) and an HTTP service to receive allowed requests.
+fltr ships as a pre-built binary, a Docker image, and source. All paths need the same two things: a JSON file containing the [**Block Rules**](../reference/block-rules.md) and an HTTP service to receive allowed requests.
 
 ## Pre-built binary
 

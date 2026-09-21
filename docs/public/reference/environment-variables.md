@@ -4,7 +4,7 @@ icon: lucide/settings
 
 # Environment variables
 
-Apart from [Block Rules](block-rules.md), fltr is configured entirely through environment variables.
+Apart from [**Block Rules**](block-rules.md), fltr is configured entirely through environment variables.
 
 !!! note "Setting environment variables"
     Set variables temporarily with `#!sh export FLTR_ALLOW_UPSTREAM=http://allow.example.com`, permanently by adding the same command to your `~/.bashrc` (or your shell's equivalent), or prepend them to every `fltr` command.
@@ -20,10 +20,10 @@ At startup, fltr sends an HTTP `HEAD` request to each configured upstream before
 
 ### `FLTR_ALLOW_UPSTREAM`
 
-URL for requests that do not match any [**Block Rules**](glossary.md#block-rule). This is the only required variable; fltr refuses to start without it.
+URL for requests that do not match any Block Rules. This is the only required variable; fltr refuses to start without it.
 
 !!! danger "Important"
-    The [**Allow Upstream**](glossary.md#allow-upstream) must be reachable at startup. fltr aborts if it cannot connect.
+    The **Allow Upstream** must be reachable at startup. fltr aborts if it cannot connect.
 
 ### `FLTR_BLOCK_UPSTREAM`
 
@@ -42,7 +42,7 @@ Path to the JSON Block Rules file. Defaults to `block_rules.json` in the current
 
 ### `FLTR_CASE_SENSITIVE`
 
-Enable case-sensitive Block Rule matching. By default both the [**Searchable Content**](glossary.md#searchable-content) and the terms are lowercased before matching; set this to `true` to match case-sensitively. Invalid values fall back to case-insensitive matching.
+Enable case-sensitive Block Rule matching. By default both the [**Searchable Content**](block-rules.md#matching-semantics) and the terms are lowercased before matching; set this to `true` to match case-sensitively. Invalid values fall back to case-insensitive matching.
 
 ## Request limits
 

@@ -27,7 +27,7 @@ The hooks run formatting, `go mod tidy`, `go vet`, a compile check, and the test
 - Follow [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`, `docs:`, ...).
 - Documentation changes live under the public docs sources; build the site with `zensical build --clean` to verify.
 - Cross-link related pages, and use the project's glossary (see `CONTEXT.md`) for new user-facing pages.
-- Follow the terminology convention: multi-word terms keep capitals (`Block Rule`), single-word state terms are lowercase mid-sentence (`term`, `allowed`, `blocked`), and the first mention of a term on a page links to the [Glossary](https://kfmndev.github.io/fltr/reference/glossary/). See the [Development page](https://kfmndev.github.io/fltr/development/#terminology) for the longer version.
+- Follow the terminology convention: multi-word terms keep capitals (`Block Rule`), single-word state terms are lowercase mid-sentence (`term`, `allowed`, `blocked`), and the first mention of a term on a page is bold and links to its dedicated page or, when it has none, the [Glossary](https://kfmndev.github.io/fltr/reference/glossary/). See the [Development page](https://kfmndev.github.io/fltr/development/#terminology) for the longer version.
 
 ## Submitting
 

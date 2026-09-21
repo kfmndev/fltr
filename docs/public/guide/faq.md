@@ -6,7 +6,7 @@ icon: lucide/message-circle-question
 
 ## Why was my request blocked when I did not expect it?
 
-A [**Block Rule**](../reference/glossary.md#block-rule) matches when **every** one of its terms appears anywhere in the [**Searchable Content**](../reference/glossary.md#searchable-content) — not just the body, but also the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters. Matching is case-insensitive by default and uses substring search, so a term `password` also matches `PasswordManager`. Set `LOG_LEVEL=debug` to see which rule and terms matched. See [Block Rules](../reference/block-rules.md).
+A [**Block Rule**](../reference/block-rules.md) matches when **every** one of its terms appears anywhere in the [**Searchable Content**](../reference/block-rules.md#matching-semantics) — not just the body, but also the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters. Matching is case-insensitive by default and uses substring search, so a term `password` also matches `PasswordManager`. Set `LOG_LEVEL=debug` to see which rule and terms matched.
 
 ## Why did my request reach the upstream at a different path?
 
@@ -18,7 +18,7 @@ fltr never sets or forwards `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forward
 
 ## What does `200 Request blocked, discarded` mean?
 
-The request matched a Block Rule, and no [**Block Upstream**](../reference/glossary.md#block-upstream) is configured, so it was discarded. fltr returns `200` with that body instead of forwarding it. Configure `FLTR_BLOCK_UPSTREAM` to send blocked requests somewhere. See [Environment variables](../reference/environment-variables.md#upstreams).
+The request matched a Block Rule, and no [**Block Upstream**](../reference/environment-variables.md#upstreams) is configured, so it was discarded. fltr returns `200` with that body instead of forwarding it. Configure `FLTR_BLOCK_UPSTREAM` to send blocked requests somewhere.
 
 ## How do I make matching case-sensitive?
 

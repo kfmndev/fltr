@@ -8,10 +8,10 @@
 
 ## 🎯 TL;DR
 
-- Request content matched against **[Block Rules](https://kfmndev.github.io/fltr/reference/glossary/#block-rule)** (case-insensitive by default)
+- Request content matched against **[Block Rules](https://kfmndev.github.io/fltr/reference/block-rules/)** (case-insensitive by default)
 - Example Block Rule `rule: password, secret`
-- Allowed requests forwarded to the **[Allow Upstream](https://kfmndev.github.io/fltr/reference/glossary/#allow-upstream)**
-- Blocked requests to the **[Block Upstream](https://kfmndev.github.io/fltr/reference/glossary/#block-upstream)** (if configured), or discarded
+- Allowed requests forwarded to the **[Allow Upstream](https://kfmndev.github.io/fltr/reference/environment-variables/#upstreams)**
+- Blocked requests to the **[Block Upstream](https://kfmndev.github.io/fltr/reference/environment-variables/#upstreams)** (if configured), or discarded
 
 > [!IMPORTANT]
 > A request is blocked only when **ALL** terms from **ANY** Block Rule match. Matching covers the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters.

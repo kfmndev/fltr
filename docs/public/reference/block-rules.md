@@ -4,7 +4,7 @@ icon: lucide/filter
 
 # Block Rules
 
-The [**Block Rules**](glossary.md#block-rule) file is a JSON object. Its keys name Block Rules, and each value is a non-empty array of non-empty terms:
+The **Block Rules** file is a JSON object. Its keys name Block Rules, and each value is a non-empty array of non-empty terms:
 
 ```json title="block_rules.json"
 {
@@ -13,7 +13,7 @@ The [**Block Rules**](glossary.md#block-rule) file is a JSON object. Its keys na
 }
 ```
 
-With the example above, a request is blocked when it contains both `password` and `secret`, or when it contains `private-key`, anywhere in its [**Searchable Content**](glossary.md#searchable-content).
+With the example above, a request is blocked when it contains both `password` and `secret`, or when it contains `private-key`, anywhere in its **Searchable Content**.
 
 ## Matching semantics
 
@@ -38,7 +38,7 @@ curl -X POST http://localhost:8080 \
     -d 'password secret'
 ```
 
-Send a request that matches no Block Rule to route it to the [**Allow Upstream**](glossary.md#allow-upstream):
+Send a request that matches no Block Rule to route it to the [**Allow Upstream**](environment-variables.md#upstreams):
 
 ```sh
 curl -X POST http://localhost:8080 \
