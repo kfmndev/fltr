@@ -46,8 +46,8 @@ services:
 
 The image is published under several tags, depending on what triggered the build:
 
-- Every push to `main`: `fltr:main` and `fltr:sha-<short-sha>`, where `<short-sha>` is the commit's short hash.
-- Every Git version tag (e.g. `v1.0.0`): `fltr:latest`, plus the version split into `1`, `1.0`, and `1.0.0`.
+- Every push to `main`: `fltr:main` and `fltr:main-<short-sha>`, where `<short-sha>` is the commit's short hash.
+- Every Git version tag (e.g. `v1.0.0`): `fltr:latest`, the version split into `1`, `1.0`, and `1.0.0`, and again `fltr:main-<short-sha>`
 
 !!! warning
     Only use the `latest` tag when you want to track the most recent release. Pin a specific version to make sure nothing changes unattended.
