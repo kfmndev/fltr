@@ -18,7 +18,7 @@ docker run -d \
 ```
 
 !!! info
-    [`ghcr.io/linuxserver/baseimage-alpine`](https://ghcr.io/linuxserver/baseimage-alpine) is used as a baseimage. Accordingly, set `PUID` and `PGID` to avoid file permission issues. See [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for details.
+    [`ghcr.io/linuxserver/baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/pkgs/container/baseimage-alpine) is used as a baseimage. Accordingly, set `PUID` and `PGID` to avoid file permission issues. See [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for details.
 
 ## Docker Compose
 

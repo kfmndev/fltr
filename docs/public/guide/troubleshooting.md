@@ -54,4 +54,4 @@ fltr does not set or forward `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwar
 
 ### Permission errors reading the rules file
 
-The images are built from [`linuxserver/docker-baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/) (`ghcr.io/linuxserver/baseimage-alpine`) and run as `abc:abc`. Set `PUID`/`PGID` to your user so the bind-mounted `block_rules.json` is readable; see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/), and [Docker](docker.md) for the setup.
+The images are built from [`ghcr.io/linuxserver/baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/pkgs/container/baseimage-alpine) and run as `abc:abc`. Set `PUID`/`PGID` to your user so the bind-mounted `block_rules.json` is readable; see [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/), and [Docker](docker.md) for the setup.
