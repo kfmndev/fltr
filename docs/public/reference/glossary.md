@@ -61,3 +61,9 @@ A path fltr answers itself before content filtering, so it is never inspected, m
 ### Dropped Path
 
 The incoming URL path is not forwarded, so requests reach the upstream URL exactly as configured.
+
+## Configuration
+
+### Configuration Argument
+
+A setting supplied as a command-line argument. It takes precedence over the same setting's environment variable, which in turn takes precedence over the default.

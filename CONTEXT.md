@@ -72,3 +72,11 @@ _Avoid_: special path, internal route
 The incoming URL path is not forwarded, so requests reach the upstream URL
 exactly as configured.
 _Avoid_: discarded path, stripped path, ignored path
+
+### Configuration
+
+**Configuration Argument**:
+A setting supplied as a command-line argument. It takes precedence over the
+same setting's environment variable, which in turn takes precedence over the
+default.
+_Avoid_: option, switch, parameter
