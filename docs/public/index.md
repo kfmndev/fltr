@@ -34,7 +34,7 @@ fltr inspects the body of every request, along with the `Title`/`Message` header
 **Reference**
 
 - [Environment variables](reference/environment-variables.md): every environment variable and its defaults
-- [Block rules](reference/block-rules.md): file format and matching semantics
+- [Block Rules](reference/block-rules.md): file format and matching semantics
 - [HTTP behavior](reference/http-behavior.md): status codes, headers, and path handling
 - [Glossary](reference/glossary.md): the terms fltr uses
 

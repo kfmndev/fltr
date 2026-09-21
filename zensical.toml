@@ -21,7 +21,7 @@ nav = [
   { "Reference" = [
     "reference/index.md",
     { "Environment variables" = "reference/environment-variables.md" },
-    { "Block rules" = "reference/block-rules.md" },
+    { "Block Rules" = "reference/block-rules.md" },
     { "HTTP behavior" = "reference/http-behavior.md" },
     { "Glossary" = "reference/glossary.md" },
   ] },

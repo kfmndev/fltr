@@ -1,4 +1,4 @@
-# Liveness endpoint on the proxy port
+# Liveness Endpoint on the proxy port
 
 fltr exposes its Liveness Endpoint at `GET /healthz` on the same listener as the
 proxy (`FLTR_ADDR`, default `:8080`), answered by a small handler wrapped around

@@ -4,7 +4,7 @@ icon: lucide/settings
 
 # Environment variables
 
-Apart from [Block rules](block-rules.md), fltr is configured entirely through environment variables.
+Apart from [Block Rules](block-rules.md), fltr is configured entirely through environment variables.
 
 !!! note "Setting environment variables"
     Set variables temporarily with `#!sh export FLTR_ALLOW_UPSTREAM=http://allow.example.com`, permanently by adding the same command to your `~/.bashrc` (or your shell's equivalent), or prepend them to every `fltr` command.
@@ -29,7 +29,7 @@ URL for requests that do not match any [**Block Rules**](glossary.md#block-rule)
 
 URL for requests that match any Block Rules. Without one, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`. See [How it works](../guide/how-it-works.md) for the full request flow.
 
-## Block rules
+## Block Rules
 
 | Variable | Required | Default |
 | --- | --- | --- |
@@ -38,7 +38,7 @@ URL for requests that match any Block Rules. Without one, blocked requests are d
 
 ### `FLTR_BLOCK_RULES_FILE`
 
-Path to the JSON Block Rules file. Defaults to `block_rules.json` in the current directory. See [Block rules](block-rules.md) for the file format.
+Path to the JSON Block Rules file. Defaults to `block_rules.json` in the current directory. See [Block Rules](block-rules.md) for the file format.
 
 ### `FLTR_CASE_SENSITIVE`
 

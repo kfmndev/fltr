@@ -2,7 +2,7 @@
 icon: lucide/filter
 ---
 
-# Block rules
+# Block Rules
 
 The [**Block Rules**](glossary.md#block-rule) file is a JSON object. Its keys name Block Rules, and each value is a non-empty array of non-empty terms:
 

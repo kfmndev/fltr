@@ -6,7 +6,7 @@ icon: lucide/message-circle-question
 
 ## Why was my request blocked when I did not expect it?
 
-A [**Block Rule**](../reference/glossary.md#block-rule) matches when **every** one of its terms appears anywhere in the [**Searchable Content**](../reference/glossary.md#searchable-content) — not just the body, but also the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters. Matching is case-insensitive by default and uses substring search, so a term `password` also matches `PasswordManager`. Set `LOG_LEVEL=debug` to see which rule and terms matched. See [Block rules](../reference/block-rules.md).
+A [**Block Rule**](../reference/glossary.md#block-rule) matches when **every** one of its terms appears anywhere in the [**Searchable Content**](../reference/glossary.md#searchable-content) — not just the body, but also the `Title`/`Message` headers and the `Title`/`title` and `Message`/`message` query parameters. Matching is case-insensitive by default and uses substring search, so a term `password` also matches `PasswordManager`. Set `LOG_LEVEL=debug` to see which rule and terms matched. See [Block Rules](../reference/block-rules.md).
 
 ## Why did my request reach the upstream at a different path?
 

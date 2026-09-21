@@ -66,7 +66,7 @@ The full documentation lives at [kfmndev.github.io/fltr](https://kfmndev.github.
 - [Troubleshooting](https://kfmndev.github.io/fltr/guide/troubleshooting/): common failures and fixes
 - [FAQ](https://kfmndev.github.io/fltr/guide/faq/): recurring questions about matching and forwarding
 - [Environment variables](https://kfmndev.github.io/fltr/reference/environment-variables/): every environment variable and its defaults
-- [Block rules](https://kfmndev.github.io/fltr/reference/block-rules/): file format and matching semantics
+- [Block Rules](https://kfmndev.github.io/fltr/reference/block-rules/): file format and matching semantics
 - [HTTP behavior](https://kfmndev.github.io/fltr/reference/http-behavior/): status codes, headers, and path handling
 - [Glossary](https://kfmndev.github.io/fltr/reference/glossary/): the terms fltr uses
 - [Development](https://kfmndev.github.io/fltr/development/): project layout, testing, building, and releases

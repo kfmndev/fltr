@@ -42,4 +42,4 @@ curl -X POST http://localhost:8080 \
     -d 'password secret'
 ```
 
-With no [**Block Upstream**](../reference/glossary.md#block-upstream) configured, fltr answers `200 Request blocked, discarded`. Requests that match no Block Rule are forwarded to the Allow Upstream. [Block rules](../reference/block-rules.md) shows both outcomes in full, and [HTTP behavior](../reference/http-behavior.md) documents every response fltr produces itself.
+With no [**Block Upstream**](../reference/glossary.md#block-upstream) configured, fltr answers `200 Request blocked, discarded`. Requests that match no Block Rule are forwarded to the Allow Upstream. [Block Rules](../reference/block-rules.md) shows both outcomes in full, and [HTTP behavior](../reference/http-behavior.md) documents every response fltr produces itself.

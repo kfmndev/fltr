@@ -59,7 +59,7 @@ flowchart TD
 1. **Health**: a request to the [**Reserved Path**](../reference/glossary.md#reserved-path) `/healthz` is answered by fltr itself and never reaches the filter or an upstream. `GET` and `HEAD` return `200`; any other method returns `405`.
 2. **Read**: the body is read up to `FLTR_MAX_BODY_SIZE` (default 10 MB). A larger body is rejected with `413 request too large`.
 3. **Assemble**: the Searchable Content is built from the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters. Nothing in the URL path is inspected.
-4. **Match**: each Block Rule is checked: it *matches* when every term of that rule is found in the Searchable Content. A request matching any Block Rule is blocked; a request matching no Block Rule is allowed. See [Block rules](../reference/block-rules.md).
+4. **Match**: each Block Rule is checked: it *matches* when every term of that rule is found in the Searchable Content. A request matching any Block Rule is blocked; a request matching no Block Rule is allowed. See [Block Rules](../reference/block-rules.md).
 5. **Route** by verdict:
     - **Allowed**: forwarded to the [**Allow Upstream**](../reference/glossary.md#allow-upstream).
     - **Blocked**: forwarded to the [**Block Upstream**](../reference/glossary.md#block-upstream) when `FLTR_BLOCK_UPSTREAM` is configured; otherwise discarded, and fltr responds with `200 Request blocked, discarded`.
