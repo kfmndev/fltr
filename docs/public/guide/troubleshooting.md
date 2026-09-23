@@ -4,7 +4,7 @@ icon: lucide/wrench
 
 # Troubleshooting
 
-Symptoms first, causes and fixes below each one. See [How it works](how-it-works.md) if you need the underlying model first.
+Symptoms first, causes and fixes below each one. See [How it works](../reference/how-it-works.md) if you need the underlying model first.
 
 ## fltr refuses to start
 
@@ -36,7 +36,7 @@ A Block Rule matched. Every term of that rule was found in the [**Searchable Con
 
 ### My request reached the upstream but at the wrong path
 
-The incoming URL path is dropped by design. Requests arrive at the upstream URL exactly as configured. See [Forwarding behavior](how-it-works.md#forwarding-behavior).
+The incoming URL path is dropped by design. Requests arrive at the upstream URL exactly as configured. See [Forwarding behavior](../reference/how-it-works.md#forwarding-behavior).
 
 ### The upstream saw different query parameters than I sent
 

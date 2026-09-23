@@ -26,22 +26,3 @@ The default file location is `block_rules.json` in the current directory; `FLTR_
 
 !!! danger "Caution"
     The service refuses to start if any Block Rule has no terms or contains a blank term after trimming.
-
-## Try a request
-
-With the example configuration running, send a request that matches the `credentials` Block Rule:
-
-```sh
-curl -X POST http://localhost:8080 \
-    -H 'Content-Type: text/plain' \
-    -H 'Title: account details' \
-    -d 'password secret'
-```
-
-Send a request that matches no Block Rule to route it to the [**Allow Upstream**](environment-variables.md#upstreams):
-
-```sh
-curl -X POST http://localhost:8080 \
-    -H 'Content-Type: text/plain' \
-    -d 'hello service'
-```

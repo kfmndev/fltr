@@ -7,25 +7,22 @@ repo_name = "kfmndev/fltr"
 docs_dir = "docs/public"
 nav = [
   { "Overview" = "index.md" },
-  { "Getting started" = [
-    { "Quickstart" = "getting-started/index.md" },
-    { "Installation" = "getting-started/installation.md" },
-  ] },
   { "Guide" = [
-    "guide/index.md",
-    { "How it works" = "guide/how-it-works.md" },
+    { "Getting started" = "guide/getting-started.md" },
     { "Docker" = "guide/docker.md" },
     { "Troubleshooting" = "guide/troubleshooting.md" },
     { "FAQ" = "guide/faq.md" },
   ] },
   { "Reference" = [
-    "reference/index.md",
+    { "How it works" = "reference/how-it-works.md" },
     { "Environment variables" = "reference/environment-variables.md" },
     { "Block Rules" = "reference/block-rules.md" },
     { "HTTP behavior" = "reference/http-behavior.md" },
     { "Glossary" = "reference/glossary.md" },
   ] },
-  { "Development" = "development.md" },
+  { "Internals" = [
+    { "Development" = "internals/development.md" },
+  ] },
 ]
 edit_uri = "edit/main/docs/public/"
 copyright = "&copy; 2026 kfmndev"

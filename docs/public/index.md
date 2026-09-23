@@ -52,23 +52,22 @@ fltr was built for a chatty service that sent status updates to a [ntfy](https:/
 
 **Getting started**
 
-- [Quickstart](getting-started/index.md): the shortest path to a running proxy
-- [Installation](getting-started/installation.md): pre-built binary, Docker, or source
+- [Getting started](guide/getting-started.md): install fltr, run it, and send your first request
 
-**Guide**
+**Other Guides**
 
-- [How it works](guide/how-it-works.md): startup, matching, and routing
 - [Docker](guide/docker.md): images, tags, compose setup
 - [Troubleshooting](guide/troubleshooting.md): common failures and fixes
 - [FAQ](guide/faq.md): recurring questions about matching and forwarding
 
 **Reference**
 
+- [How it works](reference/how-it-works.md): startup, matching, and routing
 - [Environment variables](reference/environment-variables.md): every environment variable and its defaults
 - [Block Rules](reference/block-rules.md): file format and matching semantics
 - [HTTP behavior](reference/http-behavior.md): status codes, headers, and path handling
 - [Glossary](reference/glossary.md): the terms fltr uses
 
-**Project**
+**Internals**
 
-- [Development](development.md): project layout, testing, building, and releases
+- [Development](internals/development.md): project layout, testing, building, and releases

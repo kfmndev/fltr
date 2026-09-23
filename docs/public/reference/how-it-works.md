@@ -4,7 +4,7 @@ icon: lucide/route
 
 # How it works
 
-**fltr** is a content-based HTTP request filter. It inspects the [**Searchable Content**](../reference/block-rules.md#matching-semantics) of every request, matches it against the [**Block Rules**](../reference/block-rules.md), and routes the request by its verdict. [**Matching**](../reference/glossary.md#match) is binary. The Block Rules have no rank or precedence over each other.
+**fltr** is a content-based HTTP request filter. It inspects the [**Searchable Content**](block-rules.md#matching-semantics) of every request, matches it against the [**Block Rules**](block-rules.md), and routes the request by its verdict. [**Matching**](glossary.md#match) is binary. The Block Rules have no rank or precedence over each other.
 
 ```mermaid
 flowchart LR
@@ -25,7 +25,7 @@ flowchart LR
 Before fltr starts listening, it:
 
 1. Reads the configuration and validates each upstream URL (only `http` and `https` with a hostname are accepted).
-2. Sends an HTTP `HEAD` request to each configured upstream. Any HTTP response counts as reachable, including error status codes; network and TLS failures abort startup.
+2. Sends an HTTP `HEAD` request to each configured upstream. Any HTTP response counts as reachable, including error status codes. Network and TLS failures abort the startup.
 3. Loads the Block Rules from `block_rules.json`, or the file named by `FLTR_BLOCK_RULES_FILE`. A Block Rule with no terms, or a blank term after trimming, aborts startup.
 
 ## Request flow
@@ -56,13 +56,13 @@ flowchart TD
     class G green
 ```
 
-1. **Health**: a request to the [**Reserved Path**](../reference/glossary.md#reserved-path) `/healthz` is answered by fltr itself and never reaches the filter or an upstream. `GET` and `HEAD` return `200`; any other method returns `405`.
+1. **Health**: a request to the [**Reserved Path**](glossary.md#reserved-path) `/healthz` is answered by fltr itself and never reaches the filter or an upstream. `GET` and `HEAD` return `200`; any other method returns `405`.
 2. **Read**: the body is read up to `FLTR_MAX_BODY_SIZE` (default 10 MB). A larger body is rejected with `413 request too large`.
 3. **Assemble**: the Searchable Content is built from the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters. Nothing in the URL path is inspected.
 4. **Match**: fltr checks each Block Rule. A rule *matches* when every term of that rule is found in the Searchable Content. A request matching any Block Rule is blocked. A request matching none is allowed.
 5. **Route** by verdict:
-    - **Allowed**: forwarded to the [**Allow Upstream**](../reference/environment-variables.md#upstreams).
-    - **Blocked**: forwarded to the [**Block Upstream**](../reference/environment-variables.md#upstreams) when `FLTR_BLOCK_UPSTREAM` is configured. Otherwise discarded, and fltr responds with `200 Request blocked, discarded`.
+    - **Allowed**: forwarded to the [**Allow Upstream**](environment-variables.md#upstreams).
+    - **Blocked**: forwarded to the [**Block Upstream**](environment-variables.md#upstreams) when `FLTR_BLOCK_UPSTREAM` is configured. Otherwise discarded, and fltr responds with `200 Request blocked, discarded`.
 
 ## Forwarding behavior
 
@@ -72,8 +72,8 @@ flowchart TD
 
 ## Where each variable fits
 
-- `FLTR_ALLOW_UPSTREAM` and `FLTR_BLOCK_UPSTREAM`: step 5 (routing). See [Environment variables](../reference/environment-variables.md#upstreams) for reachability semantics.
 - `FLTR_BLOCK_RULES_FILE`: startup (rules loading).
-- `FLTR_CASE_SENSITIVE`: step 4 (matching).
 - `FLTR_MAX_BODY_SIZE`: step 2 (body reading).
+- `FLTR_CASE_SENSITIVE`: step 4 (matching).
+- `FLTR_ALLOW_UPSTREAM` and `FLTR_BLOCK_UPSTREAM`: step 5 (routing). See [Startup](#startup) for reachability semantics.
 - `LOG_LEVEL` and `LOG_FORMAT`: logging only; they do not affect filtering or routing.

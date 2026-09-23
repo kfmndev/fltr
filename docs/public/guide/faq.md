@@ -10,11 +10,11 @@ A [**Block Rule**](../reference/block-rules.md) matches when **every** one of it
 
 ## Why did my request reach the upstream at a different path?
 
-The incoming URL path is dropped by design. fltr forwards requests to the upstream URL exactly as configured. See [Forwarding behavior](how-it-works.md#forwarding-behavior).
+The incoming URL path is dropped by design. fltr forwards requests to the upstream URL exactly as configured. See [Forwarding behavior](../reference/how-it-works.md#forwarding-behavior).
 
 ## Why does my upstream not see the client's IP or original URL?
 
-fltr never sets or forwards `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`, and the reverse proxy strips any such headers a proxy in front of fltr supplied. The upstream sees the hop from fltr, not the original client. See [Forwarding behavior](how-it-works.md#forwarding-behavior).
+fltr never sets or forwards `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`, and the reverse proxy strips any such headers a proxy in front of fltr supplied. The upstream sees the hop from fltr, not the original client. See [Forwarding behavior](../reference/how-it-works.md#forwarding-behavior).
 
 ## What does `200 Request blocked, discarded` mean?
 

@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve fltr. This file covers the basics; the [Development page](https://kfmndev.github.io/fltr/development/) documents the codebase layout, testing, docs build, and release flow.
+Thanks for helping improve fltr. This file covers the basics; the [Development page](https://kfmndev.github.io/fltr/internals/development/) documents the codebase layout, testing, docs build, and release flow.
 
 ## Requirements
 
@@ -28,7 +28,7 @@ The hooks run formatting, `go mod tidy`, `go vet`, a compile check, and the test
 - Documentation changes live under the public docs sources; build the site with `zensical build --clean` to verify.
 - Cross-link related pages, and use the project's glossary (see `CONTEXT.md`) for new user-facing pages.
 - Follow the terminology convention: multi-word terms keep capitals (`Block Rule`) and single-word state terms are lowercase mid-sentence (`term`, `allowed`, `blocked`).
-- Make the first mention of a term on a page bold, linking to its dedicated page or, when it has none, the [Glossary](https://kfmndev.github.io/fltr/reference/glossary/). See the [Development page](https://kfmndev.github.io/fltr/development/#terminology) for the longer version.
+- Make the first mention of a term on a page bold, linking to its dedicated page or, when it has none, the [Glossary](https://kfmndev.github.io/fltr/reference/glossary/). See the [Development page](https://kfmndev.github.io/fltr/internals/development/#terminology) for the longer version.
 
 ## Submitting
 
