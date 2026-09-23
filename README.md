@@ -1,5 +1,8 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/kfmndev/fltr/refs/heads/main/assets/logo.svg" alt="fltr logo" width="250px" style="max-width:25%"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/kfmndev/fltr/refs/heads/main/assets/logo.svg">
+  <img src="https://raw.githubusercontent.com/kfmndev/fltr/refs/heads/main/assets/logo-light.svg" alt="fltr logo" width="250px" style="max-width:25%"/>
+</picture>
 
 **Lightweight HTTP reverse proxy for content-based request filtering and routing**
 

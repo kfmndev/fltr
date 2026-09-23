@@ -5,7 +5,8 @@ icon: lucide/layout-dashboard
 # Overview
 
 <div align="center">
-<img src="assets/logo.svg" alt="fltr logo" width="250px" style="max-width:50%"/>
+<img class="logo--dark" src="assets/logo.svg" alt="fltr logo" width="250px" style="max-width:50%"/>
+<img class="logo--light" src="assets/logo-light.svg" alt="fltr logo" width="250px" style="max-width:50%"/>
 <br>
 <b>Lightweight HTTP reverse proxy for content-based request filtering and routing</b>
 <br style="margin-bottom: .5rem">

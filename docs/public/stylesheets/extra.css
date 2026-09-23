@@ -1,0 +1,20 @@
+/* Logo variants: the wordmark must be dark on light backgrounds and white on
+   dark ones. The default-visible image is the dark-mode variant; the light
+   scheme swaps them. Keyed to [data-md-color-scheme] so it follows the manual
+   palette toggle, not just prefers-color-scheme. */
+
+[data-md-color-scheme="slate"] img.logo--dark {
+  display: inline-block;
+}
+
+[data-md-color-scheme="default"] img.logo--dark {
+  display: none;
+}
+
+[data-md-color-scheme="default"] img.logo--light {
+  display: inline-block;
+}
+
+[data-md-color-scheme="slate"] img.logo--light {
+  display: none;
+}
