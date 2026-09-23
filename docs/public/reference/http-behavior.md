@@ -4,7 +4,7 @@ icon: lucide/network
 
 # HTTP behavior
 
-What fltr sends on the wire for every request, and the responses it produces itself.
+What fltr sends for every request, and the responses it produces itself.
 
 ## Responses
 

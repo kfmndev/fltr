@@ -6,12 +6,13 @@ icon: lucide/settings
 
 Apart from [**Block Rules**](block-rules.md), fltr is configured entirely through environment variables.
 
-!!! note "Setting environment variables"
-    Set variables temporarily with `#!sh export FLTR_ALLOW_UPSTREAM=http://allow.example.com`, permanently by adding the same command to your `~/.bashrc` (or your shell's equivalent), or prepend them to every `fltr` command.
+## Setting environment variables
+
+To set variables temporarily, use `#!sh export <VAR_NAME>=<VALUE>`. Add the same command to your ~/.bashrc or the equivalent configuration file for your shell, to set them permanently.
+
+Alternatively, prepend the environment variables to each fltr command like this `#!sh <VAR_NAME>=<VALUE> fltr`.
 
 ## Upstreams
-
-At startup, fltr sends an HTTP `HEAD` request to each configured upstream before it starts listening. Any HTTP response counts as reachable, including error status codes. Network and TLS failures abort the startup.
 
 | Variable | Required | Default |
 | --- | --- | --- |
@@ -20,14 +21,14 @@ At startup, fltr sends an HTTP `HEAD` request to each configured upstream before
 
 ### `FLTR_ALLOW_UPSTREAM`
 
-URL for requests that do not match any Block Rules. This is the only required variable; fltr refuses to start without it.
+URL for requests that do not match any Block Rules. This is the only required variable.
 
 !!! danger "Important"
-    The **Allow Upstream** must be reachable at startup. fltr aborts if it cannot connect.
+    The **Allow Upstream** must be set and reachable at startup. fltr aborts the startup if it cannot connect.
 
 ### `FLTR_BLOCK_UPSTREAM`
 
-URL for requests that match any Block Rules. Without one, blocked requests are discarded, and the proxy returns `200 Request blocked, discarded`. See [How it works](../guide/how-it-works.md) for the full request flow.
+URL for requests that match any Block Rules. Without one, blocked requests are discarded. See [How it works](how-it-works.md) for the full request flow.
 
 ## Block Rules
 
@@ -39,6 +40,9 @@ URL for requests that match any Block Rules. Without one, blocked requests are d
 ### `FLTR_BLOCK_RULES_FILE`
 
 Path to the JSON Block Rules file. Defaults to `block_rules.json` in the current directory. See [Block Rules](block-rules.md) for the file format.
+
+!!! danger "Important"
+    The file must be readable and contain valid rules. Otherwise, fltr aborts the startup.
 
 ### `FLTR_CASE_SENSITIVE`
 
@@ -73,8 +77,8 @@ Address where the proxy listens.
 
 ### `LOG_LEVEL`
 
-Log level: `trace`, `debug`, `info`, `warning` (`warn` also works), `error`, `fatal`, or `panic`. Invalid values fall back to `info`.
+Log level: a valid [logrus Level](https://pkg.go.dev/github.com/sirupsen/logrus#Level), for example `debug`, `info`, or `warning`. Invalid values fall back to `info`.
 
 ### `LOG_FORMAT`
 
-Log format: `text` (stderr) or `json` (stdout). Invalid values fall back to `text`.
+Log format: `text` (written to stderr) or `json` (written to stdout). Invalid values fall back to `text`.
