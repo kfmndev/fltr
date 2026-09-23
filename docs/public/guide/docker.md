@@ -6,7 +6,10 @@ icon: lucide/container
 
 Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmndev/fltr`. They are built for `linux/amd64` and `linux/arm64`.
 
-## Run with Docker
+!!! info
+    Since [`ghcr.io/linuxserver/baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/pkgs/container/baseimage-alpine) is used as a baseimage, set `PUID` and `PGID` to avoid file permission issues. See [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for details.
+
+## Start a container
 
 ```docker
 docker run -d \
@@ -16,9 +19,6 @@ docker run -d \
   -e FLTR_ALLOW_UPSTREAM=http://allow.example.com \
   ghcr.io/kfmndev/fltr
 ```
-
-!!! info
-    [`ghcr.io/linuxserver/baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/pkgs/container/baseimage-alpine) is used as a baseimage. Accordingly, set `PUID` and `PGID` to avoid file permission issues. See [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for details.
 
 ## Docker Compose
 
@@ -36,6 +36,16 @@ services:
     restart: unless-stopped
 ```
 
+## Image tags
+
+The image is published under several tags, depending on what triggered the build:
+
+- Every push to `main`: `fltr:main` and `fltr:sha-<short-sha>`, where `<short-sha>` is the commit's short hash.
+- Every Git version tag (e.g. `v1.0.0`): `fltr:latest`, plus the version split into `1`, `1.0`, and `1.0.0`.
+
+!!! warning
+    Only use the `latest` tag when you want to track the most recent release. Pin a specific version to make sure nothing changes unattended.
+
 ## Healthcheck
 
 The image ships a `HEALTHCHECK` that probes `http://${HOST}:${PORT}/healthz` every 30 seconds.
@@ -49,24 +59,14 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
       wget -q -O /dev/null "http://${HOST}:${PORT}/healthz"
 ```
 
-- `:8080` becomes port `8080`
-- `0.0.0.0:9090` becomes `9090`
+- `:8080` gets split into host `127.0.0.1` and port `8080`
+- `0.0.0.0:9090` becomes host `0.0.0.0` and port `9090`
 
-If `FLTR_ADDR` is changed, the probe follows, so the container reports healthy as long as fltr answers on the address it was told to serve.
+If `FLTR_ADDR` is changed from the default, the probe follows, so the container reports healthy as long as fltr answers on the address it was told to serve.
 
-To check the health status while the container is running, use this:
+To check the health status while the container is running (assuming fltr as its name), use this:
 
 ```console
 $ docker inspect --format '{{.State.Health.Status}}' fltr
 healthy
 ```
-
-## Image tags
-
-The image is published under several tags, depending on what triggered the build:
-
-- Every push to `main`: `fltr:main` and `fltr:sha-<short-sha>`, where `<short-sha>` is the commit's short hash.
-- Every git version tag (e.g. `v1.0.0`): `fltr:latest`, plus the version split into `1`, `1.0`, and `1.0.0`.
-
-!!! warning
-    Only use the `latest` tag when you want to track the most recent release. Pin a specific version to make sure nothing changes unattended.
