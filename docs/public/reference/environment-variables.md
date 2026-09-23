@@ -8,7 +8,7 @@ Apart from [**Block Rules**](block-rules.md), fltr is configured entirely throug
 
 ## Setting environment variables
 
-To set variables temporarily, use `#!sh export <VAR_NAME>=<VALUE>`. Add the same command to your ~/.bashrc or the equivalent configuration file for your shell, to set them permanently.
+To set variables temporarily, use `#!sh export <VAR_NAME>=<VALUE>`. Add the same command to your `~/.bashrc` or the equivalent configuration file for your shell, to set them permanently.
 
 Alternatively, prepend the environment variables to each fltr command like this `#!sh <VAR_NAME>=<VALUE> fltr`.
 
@@ -23,7 +23,7 @@ Alternatively, prepend the environment variables to each fltr command like this 
 
 URL for requests that do not match any Block Rules. This is the only required variable.
 
-!!! danger "Important"
+!!! danger "Caution"
     The **Allow Upstream** must be set and reachable at startup. fltr aborts the startup if it cannot connect.
 
 ### `FLTR_BLOCK_UPSTREAM`
@@ -41,7 +41,7 @@ URL for requests that match any Block Rules. Without one, blocked requests are d
 
 Path to the JSON Block Rules file. Defaults to `block_rules.json` in the current directory. See [Block Rules](block-rules.md) for the file format.
 
-!!! danger "Important"
+!!! danger "Caution"
     The file must be readable and contain valid rules. Otherwise, fltr aborts the startup.
 
 ### `FLTR_CASE_SENSITIVE`
