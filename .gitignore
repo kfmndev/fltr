@@ -10,7 +10,6 @@
 *.test
 *.out
 *.cover
-*.html
 
 # Coverage reports
 coverage.html
