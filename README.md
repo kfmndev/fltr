@@ -62,19 +62,9 @@ docker run -d \
 
 The full documentation lives at [kfmndev.github.io/fltr](https://kfmndev.github.io/fltr/):
 
-- [Getting started](https://kfmndev.github.io/fltr/guide/getting-started/): install, run, first request
-
-- [Docker](https://kfmndev.github.io/fltr/guide/docker/): images, tags, compose setup, PUID/PGID
-- [Troubleshooting](https://kfmndev.github.io/fltr/guide/troubleshooting/): common failures and fixes
-- [FAQ](https://kfmndev.github.io/fltr/guide/faq/): recurring questions about matching and forwarding
-
-- [How it works](https://kfmndev.github.io/fltr/reference/how-it-works/): startup, matching, and routing
-- [Environment variables](https://kfmndev.github.io/fltr/reference/environment-variables/): every environment variable and its defaults
-- [Block Rules](https://kfmndev.github.io/fltr/reference/block-rules/): file format and matching semantics
-- [HTTP behavior](https://kfmndev.github.io/fltr/reference/http-behavior/): status codes, headers, and path handling
-- [Glossary](https://kfmndev.github.io/fltr/reference/glossary/): the terms fltr uses
-
-- [Development](https://kfmndev.github.io/fltr/internals/development/): project layout, testing, building, and releases
+- **Guide**: [Getting started](https://kfmndev.github.io/fltr/guide/getting-started/), [Docker](https://kfmndev.github.io/fltr/guide/docker/), [Troubleshooting](https://kfmndev.github.io/fltr/guide/troubleshooting/), [FAQ](https://kfmndev.github.io/fltr/guide/faq/)
+- **Reference**: [How it works](https://kfmndev.github.io/fltr/reference/how-it-works/), [Environment variables](https://kfmndev.github.io/fltr/reference/environment-variables/), [Block Rules](https://kfmndev.github.io/fltr/reference/block-rules/), [HTTP behavior](https://kfmndev.github.io/fltr/reference/http-behavior/), [Glossary](https://kfmndev.github.io/fltr/reference/glossary/)
+- **Internals**: [Development](https://kfmndev.github.io/fltr/internals/development/)
 
 ## Contributing
 

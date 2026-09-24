@@ -4,9 +4,9 @@ icon: lucide/container
 
 # Docker
 
-Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmndev/fltr`. They are built for `linux/amd64` and `linux/arm64`.
+Pre-built images are published to the GitHub Container Registry as [`ghcr.io/kfmndev/fltr`](https://github.com/kfmndev/fltr/pkgs/container/fltr). They are built for `linux/amd64` and `linux/arm64`.
 
-!!! info
+!!! warning
     Since [`ghcr.io/linuxserver/baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/pkgs/container/baseimage-alpine) is used as a baseimage, set `PUID` and `PGID` to avoid file permission issues. See [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) for details.
 
 ## Start a container
@@ -15,10 +15,16 @@ Pre-built images are published to the GitHub Container Registry as `ghcr.io/kfmn
 docker run -d \
   --name fltr \
   -p 8080:8080 \
-  -v "$PWD/block_rules.json":/config/block_rules.json \
+  -v "$PWD/block_rules.json":/config/block_rules.json:ro \
   -e FLTR_ALLOW_UPSTREAM=http://allow.example.com \
   ghcr.io/kfmndev/fltr
 ```
+
+This command includes the recommended but optional flags:
+
+- start the container in the background (`-d`)
+- give the container a static name (`--name`)
+- set the explicit port mapping (`-p 8080:8080`)
 
 ## Docker Compose
 

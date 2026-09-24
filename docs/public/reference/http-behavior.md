@@ -21,8 +21,12 @@ The **Liveness Endpoint** (`/healthz`) is a **Reserved Path**. fltr answers it i
 
 ## Forwarding
 
-- The HTTP method, ordinary end-to-end headers, and body are preserved. Hop-by-hop headers are removed by the reverse proxy.
+- The HTTP method, ordinary end-to-end headers, and body are preserved. Hop-by-hop headers are removed.
 - fltr never sets or forwards `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`, and strips any such headers a proxy in front of it supplied.
-- The incoming URL path is **dropped**. The request is sent to the upstream URL exactly as configured.
+
+!!! danger "Caution"
+    When fltr fronts your upstream directly, the upstream sees the hop from fltr, not the original client.
+
+- The incoming URL path is **dropped**. The request is sent to the configured upstream URL.
 - Query parameters already present in the upstream URL are combined with the incoming query parameters. Duplicates are preserved.
 - Nothing in the URL path is inspected for matching. fltr matches only the body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters.

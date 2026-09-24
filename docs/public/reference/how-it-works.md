@@ -64,11 +64,11 @@ flowchart TD
     - **Allowed**: forwarded to the [**Allow Upstream**](environment-variables.md#upstreams).
     - **Blocked**: forwarded to the [**Block Upstream**](environment-variables.md#upstreams) when `FLTR_BLOCK_UPSTREAM` is configured. Otherwise discarded, and fltr responds with `200 Request blocked, discarded`.
 
+See [HTTP behavior](http-behavior.md#responses) for a table containing all possible responses.
+
 ## Forwarding behavior
 
-- fltr preserves the HTTP method, ordinary end-to-end headers, and body. The reverse proxy removes hop-by-hop headers. fltr **drops** the incoming URL path and sends the request to the upstream URL as configured.
-- fltr combines query parameters already present in the upstream URL with the incoming query parameters.
-- fltr never sets or forwards `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`. The reverse proxy strips any such headers a proxy in front of it supplied before forwarding. When fltr fronts your upstream directly, the upstream sees the hop from fltr, not the original client.
+fltr forwards the method, end-to-end headers, and body, **drops** the incoming URL path, and combines the upstream's query parameters with the incoming ones. It never adds `X-Forwarded-*` headers. See [HTTP behavior](http-behavior.md#forwarding) for more detail.
 
 ## Where each variable fits
 

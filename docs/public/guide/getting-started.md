@@ -65,17 +65,7 @@ Set the Allow Upstream and run fltr:
 
 === "Docker"
 
-    Due to Docker's isolation, the setup process differs in some steps:
-
-    - the Block Rules file must be mounted
-    - the environment variable must be set explicitly
-    - the internal port must be exposed (i.e. mapped to a host port)
-
-    Some optional (recommended) steps include:
-
-    - spin up the container in the background (`-d`)
-    - give the container a static name (`--name`)
-    - set the explicit port mapping (`-p 8080:8080`)
+    Due to Docker's isolation, the setup differs: the Block Rules file must be mounted, the environment variable set explicitly, and the internal port mapped to a host port.
 
     ```sh
     docker run -d \
@@ -86,10 +76,9 @@ Set the Allow Upstream and run fltr:
       ghcr.io/kfmndev/fltr
     ```
 
-    For an example Docker Compose configuration, see [Docker](docker.md#docker-compose).
+    For more details or an example Docker Compose configuration, see [Docker](docker.md).
 
 By default fltr listens on `:8080` and reads `block_rules.json` from the current directory. Both are configurable via [Environment variables](../reference/environment-variables.md).
-
 
 ## Try a request
 

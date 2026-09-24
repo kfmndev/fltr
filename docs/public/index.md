@@ -18,9 +18,11 @@ icon: lucide/layout-dashboard
 
 ## What is fltr?
 
-fltr is a lightweight HTTP reverse proxy that reads the content of every request and routes it by what it finds. It inspects the [**Searchable Content**](reference/block-rules.md#matching-semantics): the request body, the `Title` and `Message` headers, and the `title` and `message` query parameters. It matches that content against the [**Block Rules**](reference/block-rules.md). A request matching any rule is blocked; everything else is forwarded to the [**Allow Upstream**](reference/environment-variables.md#upstreams).
+fltr is a lightweight HTTP reverse proxy that routes requests by inspecting the contents of each request. It examines the [**Searchable Content**](reference/block-rules.md#matching-semantics): the request body, and selected headers and query parameters, and matches it against the [**Block Rules**](reference/block-rules.md).
 
-It preserves the method, ordinary end-to-end headers, and body, while stripping hop-by-hop headers. It combines incoming query parameters with those already in the upstream URL, and drops the incoming URL path.
+Requests with no matches, i.e. allowed requests, are forwarded to the [**Allow Upstream**](reference/environment-variables.md#upstreams). Blocked requests are either proxied to the [**Block Upstream**](reference/environment-variables.md#upstreams) if it is configured, or they are discarded.
+
+It preserves the method, ordinary end-to-end headers, and body, but drops the incoming URL path. See [HTTP behavior](reference/http-behavior.md#forwarding) for the full forwarding rules.
 
 ```mermaid
 flowchart LR
@@ -44,7 +46,7 @@ fltr was built for a chatty service that sent status updates to a [ntfy](https:/
 
 - **Content-based filtering**: fltr looks at the request body, the `Title` and `Message` headers, and the `title` and `message` query parameters, not just the URL.
 - **Simple rules**: [**Block Rules**](reference/block-rules.md) are a JSON object of named term lists. A rule matches when every term appears in the Searchable Content, and matching is case-insensitive by default.
-- **Allowed or Blocked**: requests that match no rule go to the [**Allow Upstream**](reference/environment-variables.md#upstreams); blocked requests go to the [**Block Upstream**](reference/environment-variables.md#upstreams) when configured, or are discarded.
+- **Allowed or Blocked**: requests that match no rule go to the Allow Upstream; blocked requests go to the Block Upstream when configured, or they are discarded.
 - **(Almost) transparent forwarding**: fltr preserves the method, end-to-end headers, body, and query parameters, strips hop-by-hop headers, and drops the incoming URL path.
 - **Lightweight**: fltr ships as one Go binary and a small container image.
 - **Open source**: fltr is licensed under the AGPL-3.0.

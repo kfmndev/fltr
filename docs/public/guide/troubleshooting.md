@@ -10,7 +10,7 @@ Symptoms first, causes and fixes below each one. See [How it works](../reference
 
 ### `FLTR_ALLOW_UPSTREAM is required`
 
-Set the [**Allow Upstream**](../reference/environment-variables.md#upstreams): `export FLTR_ALLOW_UPSTREAM=https://allow.example.com`. It is the only required variable.
+Set the [**Allow Upstream**](../reference/environment-variables.md#upstreams) using `export FLTR_ALLOW_UPSTREAM=<URL>`. It is the only required variable.
 
 ### `FLTR_ALLOW_UPSTREAM is unreachable` (or the [**Block Upstream**](../reference/environment-variables.md#upstreams) equivalent)
 
@@ -18,7 +18,7 @@ fltr sent a `HEAD` request and got no HTTP response at all. Check the URL, DNS, 
 
 ### `could not load block rules`
 
-The [**Block Rules**](../reference/block-rules.md) file is missing, unreadable, or invalid JSON. Check the path (default `block_rules.json` in the current directory, or `FLTR_BLOCK_RULES_FILE`), and validate the JSON.
+The [**Block Rules**](../reference/block-rules.md) file is missing, unreadable, or invalid JSON. Check the path (default `block_rules.json` in the current directory, or where `FLTR_BLOCK_RULES_FILE` points to), and validate the JSON.
 
 ### `rule "..." has no terms` / `rule "..." has an empty term at index N`
 
@@ -32,11 +32,11 @@ The value must be a size such as 10 MB, 512 KB, or 1 GB (decimal units: 1 KB = 1
 
 ### I get `200 Request blocked, discarded` for a request I expected to be allowed
 
-A Block Rule matched. Every term of that rule was found in the [**Searchable Content**](../reference/block-rules.md#matching-semantics). Matching is case-insensitive unless you set `FLTR_CASE_SENSITIVE=true`. Because fltr uses `strings.Contains`, terms match inside larger words: a Block Rule with the term `password` also matches `PasswordManager`. `LOG_LEVEL=debug` logs which Block Rule and terms matched.
+A Block Rule matched every term in the [**Searchable Content**](../reference/block-rules.md#matching-semantics). Matching is case-insensitive unless `FLTR_CASE_SENSITIVE=true`, and terms match inside larger words (`password` also matches `PasswordManager`). `LOG_LEVEL=debug` logs which rule and terms matched.
 
 ### My request reached the upstream but at the wrong path
 
-The incoming URL path is dropped by design. Requests arrive at the upstream URL exactly as configured. See [Forwarding behavior](../reference/how-it-works.md#forwarding-behavior).
+The incoming URL path is dropped by design. See [Forwarding](../reference/http-behavior.md#forwarding).
 
 ### The upstream saw different query parameters than I sent
 
@@ -48,10 +48,10 @@ The request body exceeded `FLTR_MAX_BODY_SIZE` (default 10 MB). Raise it if the 
 
 ### The upstream doesn't know the client's IP or original URL
 
-fltr does not set or forward `X-Forwarded-For`, `X-Forwarded-Host`, or `X-Forwarded-Proto`. Adding them at a proxy in front of fltr will not make them reach the upstream.
+fltr never sets or forwards `X-Forwarded-*` headers, and a proxy in front of fltr cannot add them. See [Forwarding](../reference/http-behavior.md#forwarding).
 
 ## Docker
 
 ### Permission errors reading the rules file
 
-The images are built from [`ghcr.io/linuxserver/baseimage-alpine`](https://github.com/linuxserver/docker-baseimage-alpine/pkgs/container/baseimage-alpine) and run as `abc:abc`. Set `PUID`/`PGID` to your user so the bind-mounted `block_rules.json` is readable. See [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid/) and [Docker](docker.md) for the setup.
+The images run as `abc:abc`, so the bind-mounted `block_rules.json` must be readable by that user. Set `PUID`/`PGID` to your user. See [Docker](docker.md#start-a-container) for the setup.
