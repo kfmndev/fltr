@@ -80,9 +80,9 @@ func newServer() (*http.Server, error) {
 	}
 
 	if caseSensitive {
-		log.Infof("Block rule matching is case sensitive")
+		log.Infof("Block Rule matching is case sensitive")
 	} else {
-		log.Infof("Block rule matching is case insensitive (default)")
+		log.Infof("Block Rule matching is case insensitive (default)")
 	}
 
 	// Load block rules from the specified file
@@ -91,8 +91,8 @@ func newServer() (*http.Server, error) {
 		return nil, fmt.Errorf("could not load block rules: %w", err)
 	}
 
-	log.Infof("Loaded %d block rules", len(blockRules))
-	log.Debugf("Block rules: %#v", blockRules)
+	log.Infof("Loaded %d Block Rules", len(blockRules))
+	log.Debugf("Block Rules: %#v", blockRules)
 
 	// Maximum request body size
 	maxBodySize, err := units.FromHumanSize(config.EnvOr("FLTR_MAX_BODY_SIZE", "10 MB"))
@@ -114,7 +114,7 @@ func newServer() (*http.Server, error) {
 
 	if blockProxy == nil {
 		log.Infof("Allowed requests -> %s", allowUpstream)
-		log.Info("Blocked request -> DISCARDED")
+		log.Info("Blocked request -> discarded")
 	} else {
 		log.Infof("Allowed requests -> %s", allowUpstream)
 		log.Infof("Blocked requests -> %s", blockUpstream)
