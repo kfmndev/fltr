@@ -32,8 +32,6 @@
 }
 
 [data-md-color-scheme="slate"] {
-  /* --md-code-fg-color: #abb2bf; */
-  /* --md-code-bg-color: #282c34; */
   --md-code-hl-color: #528bff;
   --md-code-hl-color--light: #528bff1a;
   --md-code-hl-comment-color: #5c6370;
@@ -45,9 +43,6 @@
   --md-code-hl-variable-color: #ef596f;
   --md-code-hl-operator-color: #2bbac5;
   --md-code-hl-special-color: #2bbac5;
-  /* --md-code-hl-name-color: #abb2bf;
-  --md-code-hl-punctuation-color: #abb2bf;
-  --md-code-hl-generic-color: #abb2bf; */
 }
 
 [data-md-color-scheme="slate"] .highlight .nc {
