@@ -4,7 +4,7 @@ icon: lucide/wrench
 
 # Troubleshooting
 
-Symptoms first, causes and fixes below each one. See [How it works](../reference/how-it-works.md) if you need the underlying model first.
+Use the following guide to resolve common issues. See [How it works](../reference/how-it-works.md) if you need the underlying model first.
 
 ## fltr refuses to start
 
@@ -48,7 +48,7 @@ The request body exceeded `FLTR_MAX_BODY_SIZE` (default 10 MB). Raise it if the 
 
 ### The upstream doesn't know the client's IP or original URL
 
-fltr never sets or forwards `X-Forwarded-*` headers, and a proxy in front of fltr cannot add them. See [Forwarding](../reference/http-behavior.md#forwarding).
+fltr never sets `X-Forwarded-*` headers, and strips any that a proxy in front of it supplied. See [Forwarding](../reference/http-behavior.md#forwarding).
 
 ## Docker
 

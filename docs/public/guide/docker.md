@@ -66,7 +66,7 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
 ```
 
 - `:8080` gets split into host `127.0.0.1` and port `8080`
-- `0.0.0.0:9090` becomes host `0.0.0.0` and port `9090`
+- `0.0.0.0:9090` becomes host `127.0.0.1` and port `9090`
 
 If `FLTR_ADDR` is changed from the default, the probe follows, so the container reports healthy as long as fltr answers on the address it was told to serve.
 

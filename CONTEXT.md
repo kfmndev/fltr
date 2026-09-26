@@ -24,8 +24,7 @@ precedence over each other.
 _Avoid_: hit, trigger
 
 **Searchable Content**:
-The combined text fltr inspects: the request body, the `Title` and `Message`
-header values, and the `title` and `message` query parameter values.
+The combined text fltr inspects: the request body, the `Title`/`title` and `Message`/`message` header values, and the `Title`/`title` and `Message`/`message` query parameter values.
 _Avoid_: payload, combined request text
 
 ### Verdicts and routing

@@ -22,7 +22,7 @@ A rule-level outcome: every term in the rule appears in the Searchable Content. 
 
 ### Searchable Content
 
-The combined text fltr inspects: the request body, the `Title` and `Message` header values, and the `title` and `message` query parameter values.
+The combined text fltr inspects: the request body, the `Title`/`title` and `Message`/`message` header values, and the `Title`/`title` and `Message`/`message` query parameter values.
 
 ## Verdicts and routing
 

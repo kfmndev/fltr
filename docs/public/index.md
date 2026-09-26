@@ -44,7 +44,7 @@ fltr was built for a chatty service that sent status updates to a [ntfy](https:/
 
 ## Why should I use fltr?
 
-- **Content-based filtering**: fltr looks at the request body, the `Title` and `Message` headers, and the `title` and `message` query parameters, not just the URL.
+- **Content-based filtering**: fltr looks at the [**Searchable Content**](reference/block-rules.md#matching-semantics), not just the URL.
 - **Simple rules**: [**Block Rules**](reference/block-rules.md) are a JSON object of named term lists. A rule matches when every term appears in the Searchable Content, and matching is case-insensitive by default.
 - **Allowed or Blocked**: requests that match no rule go to the Allow Upstream; blocked requests go to the Block Upstream when configured, or they are discarded.
 - **(Almost) transparent forwarding**: fltr preserves the method, end-to-end headers, body, and query parameters, strips hop-by-hop headers, and drops the incoming URL path.

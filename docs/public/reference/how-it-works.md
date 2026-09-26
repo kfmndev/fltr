@@ -35,7 +35,7 @@ For each incoming request:
 ```mermaid
 flowchart TD
     A(<b>Incoming request</b>)
-    B(<b>Liveness Check</b><br/>GET / HEAD → 200<br/>Other methods → 405)
+    B(<b>Liveness Endpoint</b><br/>GET / HEAD → 200<br/>Other methods → 405)
     A -- Reserved Path /healthz? --> B
     A -- Other Request --> C(<b>Read</b><br>Body ≤ <i>FLTR_MAX_BODY_SIZE</i>?)
     C -- yes --> D(<b>Assemble</b><br>Searchable Content)
