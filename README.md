@@ -1,5 +1,8 @@
 <div align="center">
-<img src="https://github.com/kfmndev/fltr/blob/main/assets/logo.svg?raw=true" alt="fltr logo" width="250px" style="max-width:25%"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/kfmndev/fltr/refs/heads/main/assets/logo.svg">
+  <img src="https://raw.githubusercontent.com/kfmndev/fltr/refs/heads/main/assets/logo-light.svg" alt="fltr logo" width="250px" style="max-width:25%"/>
+</picture>
 
 **Lightweight HTTP reverse proxy for content-based request filtering and routing**
 
@@ -8,65 +11,47 @@
 
 ## 🎯 TL;DR
 
-- Request content matched against Block Rules (case-insensitive by default)
-- Example Block Rule `rule: password, secret`
-- Allowed requests forwarded to the Allow Upstream
-- Blocked requests to the Block Upstream (if configured) or Discarded
+- Request content matched against **[Block Rules](https://kfmndev.github.io/fltr/reference/block-rules/)** (case-insensitive by default)
+- Example Block Rule `credentials: ["password", "secret"]`
+- Allowed requests forwarded to the **[Allow Upstream](https://kfmndev.github.io/fltr/reference/environment-variables/#upstreams)**
+- Blocked requests to the **[Block Upstream](https://kfmndev.github.io/fltr/reference/environment-variables/#upstreams)** (if configured), or discarded
 
 > [!IMPORTANT]
-> A request is Blocked only when **ALL** Terms from **ANY** Block Rule match. Matching covers the request body, the `Title`/`Message` headers, and the `Title`/`title` and `Message`/`message` query parameters.
+> A request is blocked only when **ALL** terms from **ANY** Block Rule match. Matching covers the [**Searchable Content**](https://kfmndev.github.io/fltr/reference/block-rules/#matching-semantics).
 
 > [!NOTE]
 > Method, ordinary end-to-end headers, and body are preserved (hop-by-hop headers are stripped); incoming query parameters are combined with those already in the upstream URL. The incoming URL path is **dropped**.
 
 ## 🚀 Quick start
 
-Requirements: [Go 1.25](https://go.dev) or newer (to run from source), a JSON file containing the Block Rules, and an HTTP service to receive Allowed requests.
+Requirements: a JSON file containing the Block Rules and an HTTP service to receive allowed requests.
 
-Create a `block_rules.json`:
+Create a `block_rules.json` with a single Block Rule:
 
 ```json
 {
-    "rule": ["password", "secret"]
+    "credentials": ["password", "secret"]
 }
 ```
 
-Point fltr at your Allow Upstream:
+Set the Allow Upstream and run fltr:
 
 ```sh
-export FLTR_ALLOW_UPSTREAM=http://allow.example.com
-```
-
-Then run it, whichever way suits you:
-
-```sh
-# From source
-go run .
-
-# From a pre-built binary (download from a GitHub release)
+FLTR_ALLOW_UPSTREAM=http://allow.example.com \
 fltr
-
-# With Docker
-docker run -d \
-  --name fltr \
-  -p 8080:8080 \
-  -v "$PWD/block_rules.json":/config/block_rules.json \
-  -e FLTR_ALLOW_UPSTREAM=http://allow.example.com \
-  ghcr.io/kfmndev/fltr
 ```
+
+For details on building from source or running fltr in a Docker container, see [Getting started](https://kfmndev.github.io/fltr/guide/getting-started/).
 
 ## 📚 Documentation
 
 The full documentation lives at [kfmndev.github.io/fltr](https://kfmndev.github.io/fltr/):
 
-- [Configuration](https://kfmndev.github.io/fltr/configuration/): every environment variable and its defaults
-- [Block rules](https://kfmndev.github.io/fltr/block-rules/): file format and matching semantics
-- [Docker](https://kfmndev.github.io/fltr/docker/): images, tags, compose setup, PUID/PGID
-- [How it works](https://kfmndev.github.io/fltr/how-it-works/): startup, matching, and routing
-- [Troubleshooting](https://kfmndev.github.io/fltr/troubleshooting/): common failures and fixes
-- [Development](https://kfmndev.github.io/fltr/development/): project layout, testing, building, and releases
+- **Guide**: [Getting started](https://kfmndev.github.io/fltr/guide/getting-started/), [Docker](https://kfmndev.github.io/fltr/guide/docker/), [Troubleshooting](https://kfmndev.github.io/fltr/guide/troubleshooting/), [FAQ](https://kfmndev.github.io/fltr/guide/faq/)
+- **Reference**: [How it works](https://kfmndev.github.io/fltr/reference/how-it-works/), [Environment variables](https://kfmndev.github.io/fltr/reference/environment-variables/), [Block Rules](https://kfmndev.github.io/fltr/reference/block-rules/), [HTTP behavior](https://kfmndev.github.io/fltr/reference/http-behavior/), [Glossary](https://kfmndev.github.io/fltr/reference/glossary/)
+- **Internals**: [Development](https://kfmndev.github.io/fltr/internals/development/)
 
-## Contributing
+## 📖 Project guidelines
 
 - [Contributing](CONTRIBUTING.md): setup, commit conventions, and PR flow
 - [Security](SECURITY.md): how to report a vulnerability privately

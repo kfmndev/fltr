@@ -1,0 +1,65 @@
+/* Logo variants: the wordmark must be dark on light backgrounds and white on
+   dark ones. The default-visible image is the dark-mode variant; the light
+   scheme swaps them. Keyed to [data-md-color-scheme] so it follows the manual
+   palette toggle, not just prefers-color-scheme. */
+
+[data-md-color-scheme="slate"] img.logo--dark {
+  display: inline-block;
+}
+
+[data-md-color-scheme="default"] img.logo--dark {
+  display: none;
+}
+
+[data-md-color-scheme="default"] img.logo--light {
+  display: inline-block;
+}
+
+[data-md-color-scheme="slate"] img.logo--light {
+  display: none;
+}
+
+/* Syntax theme: One Dark Pro Vivid.
+   Mirrors the VS Code "One Dark Pro Vivid" palette onto Zensical's code-block CSS variables.
+   Keep base foreground and background colors. */
+
+.highlight :is(.c, .cm, .c1, .ch, .cs, .sd) {
+  font-style: italic;
+}
+
+.highlight .nt {
+  color: var(--md-code-hl-variable-color);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-code-hl-color: #528bff;
+  --md-code-hl-color--light: #528bff1a;
+  --md-code-hl-comment-color: #5c6370;
+  --md-code-hl-keyword-color: #d55fde;
+  --md-code-hl-string-color: #89ca78;
+  --md-code-hl-number-color: #d19a66;
+  --md-code-hl-constant-color: #d19a66;
+  --md-code-hl-function-color: #61afef;
+  --md-code-hl-variable-color: #ef596f;
+  --md-code-hl-operator-color: #2bbac5;
+  --md-code-hl-special-color: #2bbac5;
+}
+
+[data-md-color-scheme="slate"] .highlight .nc {
+  color: #e5c07b;
+}
+
+/* Colors for light theme, based on One Dark Pro Vivid but with some adjustments for better visibility on light backgrounds. */
+[data-md-color-scheme="default"] {
+  --md-code-hl-color: #528bff;
+  --md-code-hl-color--light: #528bff1a;
+  --md-code-hl-comment-color: #5c6370;
+  --md-code-hl-keyword-color: #bf31c9;
+  --md-code-hl-string-color: #3fc51d;
+  --md-code-hl-number-color: #f87f0d;
+  --md-code-hl-constant-color: #f87f0d;
+  --md-code-hl-function-color: #61afef;
+  --md-code-hl-variable-color: #e42b47;
+  --md-code-hl-operator-color: #2bbac5;
+  --md-code-hl-special-color: #2bbac5;
+}

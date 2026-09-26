@@ -1,32 +1,16 @@
 # Contributing
 
-Thanks for helping improve fltr. This file covers the basics; the [Development page](https://kfmndev.github.io/fltr/development/) documents the codebase layout, testing, docs build, and release flow.
-
-## Requirements
-
-- [Go 1.25](https://go.dev) or newer
-- [prek](https://github.com/j178/prek)
+Thanks for helping improve fltr. This file covers the basics; the [Development page](https://kfmndev.github.io/fltr/internals/development/) documents the codebase layout, testing, docs build, and release flow.
 
 ## Getting set up
 
-```sh
-go build ./...
-prek install --hook-type pre-commit --hook-type commit-msg
-```
-
-The hooks run formatting, `go mod tidy`, `go vet`, a compile check, and the test suite on every commit; the `commit-msg` hook enforces Conventional Commits.
+Install Go and `prek` to build and test locally. The [Development page](https://kfmndev.github.io/fltr/internals/development/) covers the requirements, setup, and testing commands.
 
 ## Making changes
 
-- Build and test locally before pushing:
-
-  ```sh
-  go test ./...
-  ```
-
-- Follow [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`, `docs:`, ...).
+- Follow [Conventional Commits](https://www.conventionalcommits.org) (`feat:`, `fix:`, `docs:`, ...). The `commit-msg` hook enforces this.
 - Documentation changes live under the public docs sources; build the site with `zensical build --clean` to verify.
-- Cross-link related pages, and use the project's glossary (see `CONTEXT.md`) for new user-facing pages.
+- For docs, follow the [terminology convention](https://kfmndev.github.io/fltr/internals/development/#terminology), cross-link related pages, and use the glossary (`CONTEXT.md`) for new user-facing pages.
 
 ## Submitting
 
@@ -35,7 +19,7 @@ Open a pull request against `main` with a Conventional-Commits-style title. CI r
 ## Reporting issues
 
 - Bugs: open an issue with steps to reproduce, expected vs actual behavior, and your configuration (redact anything sensitive).
-- Vulnerabilities: do **not** open a public issue — see [SECURITY.md](SECURITY.md).
+- Vulnerabilities: do **not** open a public issue; see [SECURITY.md](SECURITY.md).
 
 ## License
 

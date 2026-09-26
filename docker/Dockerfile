@@ -27,5 +27,5 @@ EXPOSE 8080
 # back to loopback when it binds all interfaces.
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
   CMD HOST="${FLTR_ADDR%:*}"; PORT="${FLTR_ADDR##*:}"; \
-      case "$HOST" in ""|0.0.0.0|"::"|"[::]") HOST=127.0.0.1;; esac; \
+      case "$HOST" in ""|"0.0.0.0"|"::"|"[::]") HOST="127.0.0.1";; esac; \
       wget -q -O /dev/null "http://${HOST}:${PORT}/healthz"
