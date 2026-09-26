@@ -4,7 +4,7 @@ icon: lucide/rocket
 
 # Getting started
 
-Follow this guide, to get fltr running with one [**Block Rule**](../reference/block-rules.md) and one [**Allow Upstream**](../reference/environment-variables.md#upstreams).
+Follow this guide to get fltr running with one [**Block Rule**](../reference/block-rules.md) and one [**Allow Upstream**](../reference/environment-variables.md#upstreams).
 
 Every install path needs the same two things: a JSON file containing the Block Rules and an HTTP service to receive allowed requests.
 

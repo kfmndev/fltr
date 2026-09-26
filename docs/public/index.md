@@ -18,7 +18,7 @@ icon: lucide/layout-dashboard
 
 ## What is fltr?
 
-fltr is a lightweight HTTP reverse proxy that routes requests by inspecting the contents of each request. It examines the [**Searchable Content**](reference/block-rules.md#matching-semantics): the request body, and selected headers and query parameters, and matches it against the [**Block Rules**](reference/block-rules.md).
+fltr is a lightweight HTTP reverse proxy that routes requests by inspecting the contents. It examines the [**Searchable Content**](reference/block-rules.md#matching-semantics): the request body, and selected headers and query parameters, and matches it against the [**Block Rules**](reference/block-rules.md).
 
 Requests with no matches, i.e. allowed requests, are forwarded to the [**Allow Upstream**](reference/environment-variables.md#upstreams). Blocked requests are either proxied to the [**Block Upstream**](reference/environment-variables.md#upstreams) if it is configured, or they are discarded.
 
