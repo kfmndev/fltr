@@ -65,7 +65,7 @@ func (f ContentFilter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func MatchRules(searchText string, blockRules map[string][]string, caseSensitive bool) bool {
 	for key, terms := range blockRules {
 		if AllTermsFound(searchText, terms, caseSensitive) {
-			log.Debugf("Matched terms %#v (rule %q)", terms, key)
+			log.Debugf("Matched terms %#v (Block Rule %q)", terms, key)
 			return true
 		}
 	}
